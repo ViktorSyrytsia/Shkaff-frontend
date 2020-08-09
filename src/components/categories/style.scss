@@ -1,0 +1,25 @@
+.categories-container {
+       
+        display:  flex;
+       height: calc(100vh - 80px);
+
+        &__main {
+                flex-basis: 66%;
+                display: flex;
+        }
+
+        &__main > div {
+                flex-grow: 1;
+        }
+
+        &__sub {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+        }
+
+        &__sub > div {
+                flex-grow: 1;
+                width: 100%;
+        }
+}

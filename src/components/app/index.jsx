@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Categories from '../categories'
+
+import 'semantic-ui-css/semantic.min.css';
 
 const App = () => {
         return (
                 <div>
-                        Hello world!
+                        <Categories />
                 </div>
         )
 }
