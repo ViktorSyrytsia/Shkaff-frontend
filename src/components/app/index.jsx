@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 
-import {getCategories} from "../../redux/categories/categories.actions";
-import {Header} from '../../containers';
+import { getCategories } from "../../redux/categories/categories.actions";
+import { Header } from '../../containers';
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -15,7 +15,8 @@ const App = () => {
 
     return (
         <div>
-            <Header/>
+            <Header />
+            <Categories />
         </div>
     )
 }

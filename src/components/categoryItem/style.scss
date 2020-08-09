@@ -1,0 +1,34 @@
+
+.categoryItem__container {
+        position: relative;
+        cursor: pointer;
+
+
+
+        &-shader {
+                background-color: black;
+                opacity: 50%;
+                height: 100%;
+                width: 0;
+                transition: 0.3s;
+
+              
+        }
+        &:hover &-shader {
+                width: 100%;
+        }
+
+        &__title {
+                font-family: 'Montserrat', sans-serif;
+                color: white;
+                margin-top: 20px;
+                margin-left: 20px;
+                font-size: 30px;
+                position: absolute;
+                top: 0;
+                left: 0;
+        }
+
+       
+}
+
