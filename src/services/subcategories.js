@@ -2,15 +2,19 @@ import { gql } from 'apollo-boost'
 
 import client from "./index";
 
-export const getCategories = () =>
+export const getSubcategories = () =>
     client.query({
         query: gql`
             {
-                getCategories {
+                getSubcategories {
                     id
-                    name
-                    image
-                    subcategories {
+                    name                    
+                    category {
+                        id
+                        name         
+                       
+                    }
+                    products {
                         id
                         name                        
                     }

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch } from "react-redux";
 
 import { getCategories } from "../../redux/categories/categories.actions";
+import {getProducts} from "../../redux/products/products.actions";
+import {getSubcategories} from "../../redux/subcategories/subcategories.actions";
 import { Header } from '../../containers';
 import {Categories} from '../index'
 
@@ -12,6 +14,8 @@ const App = () => {
 
     useEffect(() => {
         dispatch(getCategories())
+        dispatch(getProducts())
+        dispatch(getSubcategories())
     }, [dispatch])
 
     return (

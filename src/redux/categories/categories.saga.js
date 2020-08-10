@@ -5,7 +5,7 @@ import {
     setLoading,
 } from './categories.actions';
 
-import { getCategories} from '../../services/category';
+import { getCategories} from '../../services/categories';
 import { GET_CATEGORIES} from './categories.types';
 
 function* handleCategoriesLoad() {
