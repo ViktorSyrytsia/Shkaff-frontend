@@ -1,0 +1,7 @@
+.spinner {
+color: white;
+
+  &:after {
+    border-color: #ffffff transparent transparent !important;
+  }
+}
