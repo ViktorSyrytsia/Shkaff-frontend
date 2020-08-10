@@ -10,7 +10,7 @@ const product = {
         sizes: { xs: 2, s: 0, m: 1, l: 1, xl: 0, xxl: 0 }
 }
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
         return (
                 <Card>
                         <Image src={product.images[0]} wrapped ui={false} />

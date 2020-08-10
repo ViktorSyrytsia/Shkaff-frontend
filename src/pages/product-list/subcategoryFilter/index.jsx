@@ -1,9 +1,9 @@
 import React from 'react'
 
-const SubcategoryFilter = () => {
+const SubcategoryFilter = ({ subCategories }) => {
         return (
                 <div>
-                        SubcategoryFilter
+                        {subCategories && subCategories.map(sc => <div key={sc.id}>{sc.name}</div>)}
                 </div>
         )
 }
