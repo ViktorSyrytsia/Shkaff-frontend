@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCategories } from "../../redux/categories/categories.actions";
 import { Header } from '../../containers';
+import Categories from '../categories';
 
 import 'semantic-ui-css/semantic.min.css'
 
