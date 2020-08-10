@@ -9,7 +9,7 @@ const ProductList = ({ match: { params } }) => {
         // const [subcategory, setSubcategory] = useState(null);
 
 
-        const categories = useSelector(({ Categories }) => Categories.list);
+/*        const categories = useSelector(({ Categories }) => Categories.list);
         const subCategories = useSelector(({ Subcategories }) => Subcategories.list);
         const products = useSelector(({ Products }) => Products.list);
 
@@ -30,12 +30,12 @@ const ProductList = ({ match: { params } }) => {
                 }
         }
 
-        console.log(findTypeName(categories, subCategories, params.category));
+        console.log(findTypeName(categories, subCategories, params.category));*/
 
         return (
-                <div>
-                        <SubcategoryFilter subCategories={subCategories} />
-                        {products && products.map(product => <ProductCard key={product.id} product={product} />)}
+                <div>jj
+                        {/*<SubcategoryFilter subCategories={subCategories} />
+                        {products && products.map(product => <ProductCard key={product.id} product={product} />)}*/}
                 </div>
         )
 }
