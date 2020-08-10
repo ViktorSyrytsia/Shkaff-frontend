@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
-import {Icon, Search} from "semantic-ui-react";
+import {Icon} from "semantic-ui-react";
 
 import SearchBarListItem from "./SearchBarListItem";
 import {toLowerCase} from '../../utils'
@@ -38,25 +38,25 @@ const SearchBar = () => {
     }
 
     return (
-        <>
+        <div>
             <div className='search'>
                 <input type="text"
                        onChange={onSearch}
                        onFocus={onSearch}
-                       onBlur={() => setListVisibility(false)}/>
+                       onBlur={() => setTimeout(() => setListVisibility(false), 100)}/>
                 <Icon name='search'/>
             </div>
             <ul className={`search-list ${listVisibility && 'visible'}`}>
                 {filteredList.length && searchValue ? (
                     filteredList.map(item => (
-                        <SearchBarListItem key={item.id} item={item}/>
+                        <SearchBarListItem key={item.id} item={item} setListVisibility={setListVisibility}/>
                     ))
                 ) : (
                     <h6 className='empty-list'>Пошук не дав результатів</h6>
                 )
                 }
             </ul>
-        </>
+        </div>
     )
 }
 

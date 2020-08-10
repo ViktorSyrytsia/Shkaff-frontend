@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import SubcategoryFilter from './subcategoryFilter/';
 import ProductCard from './productCard';
 
+<<<<<<< HEAD
 const ProductList = ({ match: { params } }) => {
         // const [category, setCategory] = useState(null);
         // const [subcategory, setSubcategory] = useState(null);
@@ -30,6 +31,9 @@ const ProductList = ({ match: { params } }) => {
         }
 
         console.log(findTypeName(categories, subCategories, params.category));
+=======
+const ProductList = (props) => {
+>>>>>>> a4a18326811c6666e169c933ce9fe7daf1786291
         return (
                 <div>
                         <SubcategoryFilter subCategories={subCategories} />

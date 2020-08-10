@@ -9,18 +9,18 @@ const Routes = () => {
         <Switch>
             <Route exact path='/' component={Categories} />
             <Route exact path='/:category'
-
                 render={(routerProps) => {
+<<<<<<< HEAD
+=======
+
+
+                    console.log(routerProps)
+>>>>>>> a4a18326811c6666e169c933ce9fe7daf1786291
                     return (
                         <ProductList {...routerProps} />
                     )
                 }}
             />
-            {/*       <Route exact path='/чоловыкам' component={CategoriesPage}/>
-            <Route exact path='/subcategories' component={SubcategoriesPage}/>
-            <Route exact path='/products' component={ProductsPage}/>
-            <Route exact path='/orders' component={OrdersPage}/>
-            <Route exact path='/settings' component={SettingsPage}/>*/}
         </Switch>
     )
 }
