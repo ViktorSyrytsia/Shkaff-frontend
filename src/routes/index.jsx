@@ -9,8 +9,8 @@ const Routes = () => {
         <Switch>
             <Route exact path='/' component={Categories} />
             <Route exact path='/:category'
-
                 render={(routerProps) => {
+
 
                     console.log(routerProps)
                     return (

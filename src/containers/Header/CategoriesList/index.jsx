@@ -14,7 +14,7 @@ const CategoriesList = ({list}) => {
                     <ul className='header__subcategories-list'>
                         {item.subcategories.map(subcategory => (
                             <li key={subcategory.id}>
-                                <Link to={`/${toLowerCase(subcategory.name)}`}>
+                                <Link to={`/${toLowerCase(item.name)}`}>
                                     {subcategory.name}
                                 </Link>
                             </li>
