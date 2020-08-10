@@ -7,12 +7,12 @@
 
 
         &-shader {
-                
+
                 opacity: 0%;
                 height: 100%;
                 transition: 0.4s;
 
-              
+
         }
         &:hover &-shader {
                 opacity: 20%;
@@ -20,7 +20,6 @@
 
         &__title {
                 border-bottom: 3px solid;
-                font-family: 'Montserrat', sans-serif;
                 color: white;
                 margin-bottom: 30px;
                 margin-left: 30px;
@@ -31,6 +30,6 @@
                 left: 0;
         }
 
-       
+
 }
 
