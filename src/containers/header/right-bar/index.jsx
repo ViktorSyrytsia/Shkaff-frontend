@@ -1,22 +1,22 @@
-                                                                                                                                                                                                                                                                                                                                    import React from "react";
+import React from "react";
 import { Icon } from 'semantic-ui-react'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import {SearchBar} from '../../index'
+import { SearchBar } from '../../index'
 
 const RightBar = () => {
 
     return (
         <div className='header__right-bar'>
-        <SearchBar />
+            <SearchBar />
             <Link to='/wishlist'>
-                <Icon name='heart'/>
+                <Icon name='heart' />
             </Link>
             <Link to='/cart'>
-                <Icon name='cart'/>
+                <Icon name='cart' />
             </Link>
         </div>
     )
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+}
 
 export default RightBar;
