@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
-import SubcategoryFilter from './subcategoryFilter/';
-import ProductCard from './productCard';
+import SubcategoryFilter from './subcategory-filter/';
+import ProductCard from './product-card';
 
 
 const ProductList = ({ match: { params } }) => {
