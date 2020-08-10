@@ -10,7 +10,7 @@ const initialState = {
     loading: false
 }
 
-const categoriesReducer = (state = initialState, {type, payload}) => {
+const categoriesReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case SET_CATEGORY: {
             return {
