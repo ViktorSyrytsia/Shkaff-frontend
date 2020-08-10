@@ -1,2 +1,2 @@
-export {default as Header} from './Header'
-export {default as SearchBar} from './SerachBar'
+export { default as Header } from './header'
+export { default as SearchBar } from './search-bar'
