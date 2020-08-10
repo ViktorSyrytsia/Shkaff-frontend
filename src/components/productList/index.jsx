@@ -1,6 +1,7 @@
 import React from 'react'
 
-const ProductList = () => {
+const ProductList = (props) => {
+        console.log(props);
         return (
                 <div>
 

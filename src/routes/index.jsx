@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { ProductList } from '../components/productList';
 
 import {Categories} from "../components";
 
@@ -8,11 +9,14 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path='/' component={Categories} />
-            <Route path='/:category'
-                exact
-                render={({ match }) => {
-                    const { category } = match.params;
-                    console.log(category)
+            <Route exact path='/:category'
+
+                render={(routerProps) => {
+
+                    console.log(routerProps)
+                    return (
+                        <ProductList {...routerProps} />
+                    )
                 }}
             />
             {/*       <Route exact path='/чоловыкам' component={CategoriesPage}/>
