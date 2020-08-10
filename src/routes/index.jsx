@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import {Categories, ProductList} from "../components";
+import { Categories, ProductList } from "../components";
 
 const Routes = () => {
 
@@ -11,8 +11,6 @@ const Routes = () => {
             <Route exact path='/:category'
 
                 render={(routerProps) => {
-
-                    console.log(routerProps)
                     return (
                         <ProductList {...routerProps} />
                     )
