@@ -6,6 +6,7 @@
         &__main {
                 flex-basis: 66%;
                 display: flex;
+                justify-content: center;
         }
 
         &__main > div {
@@ -22,4 +23,9 @@
                 flex-grow: 1;
                 width: 100%;
         }
+}
+
+.link {
+        height: 100%;
+        width: 100%;
 }

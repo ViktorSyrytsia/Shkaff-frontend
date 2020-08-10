@@ -39,12 +39,18 @@ const CategoryItem = ({ content }) => {
         }
 
         return (
+
+
                 <div style={containerCoverImage} className="categoryItem__container">
+
                         <div style={colorFunc(content, 'backgroundColor')} className="categoryItem__container-shader">
 
                         </div>
                         <div style={colorFunc(content, 'borderBottomColor')} className="categoryItem__container__title">{content.name}</div>
                 </div>
+
+
+
         )
 }
 
