@@ -5,7 +5,7 @@ import { getCategories } from "../../redux/categories/categories.actions";
 import {getProducts} from "../../redux/products/products.actions";
 import {getSubcategories} from "../../redux/subcategories/subcategories.actions";
 import { Header } from '../../containers';
-import {Categories} from '../index'
+import { Categories, Footer } from '../index'
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -22,6 +22,7 @@ const App = () => {
         <div>
             <Header />
             <Categories />
+            <Footer />
         </div>
     )
 }
