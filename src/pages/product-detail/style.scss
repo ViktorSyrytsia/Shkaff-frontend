@@ -9,13 +9,15 @@
   max-width: 1280px;
 
   &__item {
+    display: flex;
+
     &__images {
-      width: 400px !important;
-      height: 600px !important;
+      height: 600px;
       display: grid;
       grid-template-columns: repeat(4, 100px);
       grid-template-rows: 100px 100px 100px 100px 1fr;
       grid-gap: 10px;
+      margin-top: 10px;
 
       img {
         display: block;
@@ -31,6 +33,19 @@
 
       img:not(:first-child) {
         grid-area: auto;
+      }
+    }
+
+    &__description {
+      padding: 0 50px;
+      .price {
+        font-weight: 600;
+      }
+      h1 {
+        text-transform: uppercase;
+      }
+      pre {
+        font-family: inherit;
       }
     }
   }

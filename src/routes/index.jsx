@@ -15,25 +15,35 @@ const item = {
         {link: "https://ochki.ua/wa-data/public/shop/products/67/89/38967/images/57984/Ray-Ban-Hexagonal-Flat-Lenses-RB3548N-001-30.970.jpg"},
     ],
     subcategory: {
-        id:"5f1f25acbfa56026a4c88471",
-        name:"Glasses",
-        __typename:"Subcategory",
+        id: "5f1f25acbfa56026a4c88471",
+        name: "Glasses",
+        __typename: "Subcategory",
     },
     category: {
-        id:"5f1f2584bfa56026a4c8846d",
-        name:"Жінкам",
-        __typename:"Category"
+        id: "5f1f2584bfa56026a4c8846d",
+        name: "Жінкам",
+        __typename: "Category"
     },
     sizes: {
-        xs:222,
-        s:55,
-        m:0,
-        l:87,
-        xl:0,
-        xxl:5758,
-        __typename:"Sizes"
+        xs: 222,
+        s: 55,
+        m: 0,
+        l: 87,
+        xl: 0,
+        xxl: 5758,
+        __typename: "Sizes"
     },
-    description: "dsfew423432",
+    description: `<pre>Повертаючи традицію на голову. Зроблена з лляно-бавовняної суміші, ця сорочка має ступінчастий подол з 
+        бічними прорізами.
+               
+        - Прямо підходить
+        - Відкритий комір
+        - Кнопка спереду
+        - передня кишеня з накладними кишенями
+        - Закатані рукава
+      
+        70% білизна, 30% бавовна / машинне прання       
+        Довжина спини розміром S - 87 см / Модель - 176 см у висоту, і вона має розмір S</pre>`,
     createdAt: "2020-07-27T19:04:22.234Z",
     __typename: "Product"
 }
