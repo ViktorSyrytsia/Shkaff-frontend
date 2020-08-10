@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import CategoryItem from '../categoryItem';
 
 import './style.scss';
+import { Link } from 'react-router-dom';
 
 
 const Categories = () => {
@@ -15,7 +16,9 @@ const Categories = () => {
                                 {categories.map((cat, idx) => {
                                         if (idx <= 1) {
                                                 return (
-                                                        <CategoryItem key={cat.id} content={cat} />
+                                                        <Link className="link" key={cat.id} to={cat.name}>
+                                                                <CategoryItem content={cat} />
+                                                        </Link>
                                                 )
 
                                         }
@@ -25,9 +28,10 @@ const Categories = () => {
                                 {categories.map((cat, idx) => {
                                         if (idx > 1) {
                                                 return (
-                                                        <CategoryItem key={cat.id} content={cat} />
+                                                        <Link className="link" key={cat.id} to={cat.name}>
+                                                                <CategoryItem content={cat} />
+                                                        </Link>
                                                 )
-
                                         }
                                 })}
                         </div>
