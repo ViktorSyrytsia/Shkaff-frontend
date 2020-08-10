@@ -1,22 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 
-import {toLowerCase} from '../../../utils'
+import {linkGenerator} from '../../../utils'
 
 const SearchBarListItem = ({item}) => {
-
-    const linkGenerator = ({id, name, category, subcategory, __typename}) => {
-        switch (__typename) {
-            case 'Category':
-                return `/${toLowerCase(name)}`
-            case 'Subcategory':
-                return `/${toLowerCase(category.name)}/${toLowerCase(name)}`
-            case 'Product':
-                return `/${toLowerCase(category.name)}/${toLowerCase(subcategory.name)}/${id}`
-            default:
-                return 'someLink'
-        }
-    }
 
     const itemGenerator = ({name, category, subcategory,  __typename, price}) => {
         switch (__typename) {

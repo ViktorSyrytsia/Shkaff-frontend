@@ -18,11 +18,6 @@ const Routes = () => {
                     )
                 }}
             />
-            {/*       <Route exact path='/чоловыкам' component={CategoriesPage}/>
-            <Route exact path='/subcategories' component={SubcategoriesPage}/>
-            <Route exact path='/products' component={ProductsPage}/>
-            <Route exact path='/orders' component={OrdersPage}/>
-            <Route exact path='/settings' component={SettingsPage}/>*/}
         </Switch>
     )
 }
