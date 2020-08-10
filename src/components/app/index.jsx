@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { getCategories } from "../../redux/categories/categories.actions";
 import { Header } from '../../containers';
-import {Categories} from '../index'
+import { Categories, Footer } from '../index'
 
 import 'semantic-ui-css/semantic.min.css'
 
@@ -18,6 +18,7 @@ const App = () => {
         <div>
             <Header />
             <Categories />
+            <Footer />
         </div>
     )
 }
