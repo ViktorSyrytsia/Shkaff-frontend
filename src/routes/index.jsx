@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import { ProductList } from '../components/productList';
 
 import App from '../components/app'
 
@@ -9,11 +10,14 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path='/' component={App} />
-            <Route path='/:category'
-                exact
-                render={({ match }) => {
-                    const { category } = match.params;
-                    console.log(category)
+            <Route exact path='/:category'
+
+                render={(routerProps) => {
+
+                    console.log(routerProps)
+                    return (
+                        <ProductList {...routerProps} />
+                    )
                 }}
             />
             {/*       <Route exact path='/чоловыкам' component={CategoriesPage}/>
