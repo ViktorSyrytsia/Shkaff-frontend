@@ -6,15 +6,15 @@ const CategoriesList = ({list}) => {
 
     return (
         <ul className='header__categories-list'>
-            {list.map(item => (
-                <li key={item.id}>
-                    <Link to={`/${toLowerCase(item.name)}`}>
-                        {item.name}
+            {list.map(category => (
+                <li key={category.id}>
+                    <Link to={{pathname: toLowerCase(category.name), query: category}}>
+                        {category.name}
                     </Link>
                     <ul className='header__subcategories-list'>
-                        {item.subcategories.map(subcategory => (
+                        {category.subcategories.map(subcategory => (
                             <li key={subcategory.id}>
-                                <Link to={`/${toLowerCase(item.name)}`}>
+                                <Link to={{pathname: toLowerCase(category.name), query: subcategory}}>
                                     {subcategory.name}
                                 </Link>
                             </li>

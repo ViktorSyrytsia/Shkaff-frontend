@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-import {linkGenerator} from '../../../utils'
+import {linkGenerator, toLowerCase} from '../../../utils'
 
 const SearchBarListItem = ({item}) => {
 
@@ -36,7 +36,7 @@ const SearchBarListItem = ({item}) => {
 
     return (
         <li>
-            <Link to={linkGenerator(item)}>
+            <Link to={{pathname: linkGenerator(item), query: item}}>
                 {itemGenerator(item)}
             </Link>
         </li>
