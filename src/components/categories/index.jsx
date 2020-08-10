@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-import CategoryItem from '../categoryItem';
+import CategoryItem from '../category-item';
 
 import './style.scss';
 import { Link } from 'react-router-dom';
