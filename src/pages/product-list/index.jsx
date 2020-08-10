@@ -4,38 +4,36 @@ import SubcategoryFilter from './subcategoryFilter/';
 import ProductCard from './productCard';
 
 
-const ProductList = ({ match: { params } }) => {
-        // const [category, setCategory] = useState(null);
-        // const [subcategory, setSubcategory] = useState(null);
+const ProductList = ({ location: { query } }) => {
 
+        const [category, setCategory] = useState(null);
+        const [subcategory, setSubategory] = useState(null);
 
-        const categories = useSelector(({ Categories }) => Categories.list);
-        const subCategories = useSelector(({ Subcategories }) => Subcategories.list);
-        const products = useSelector(({ Products }) => Products.list);
+        const { subcategories, products } = useSelector(({ Products, Subcategories }) => ({
+                subcategories: Subcategories.list,
+                products: Products.list,
+        }))
 
-        const findTypeName = (categories, subcategories, params) => {
-                const category = categories.find(cat => cat.name === params);
-                if (!category) {
-                        const subcategory = subcategories.find(sc => sc.name === params);
-                        const category = categories.find(cat => cat.id === subcategory.category.id);
-                        return {
-                                category: category.name,
-                                subcategory: subcategory.name
-                        }
-
-                } else {
-                        return {
-                                category: category.name
-                        }
+        useEffect(() => {
+                if (query && query.__typename === "Category") {
+                        setCategory(query.id);
+                        setSubategory(null)
+                } else if (query && query.__typename === "Subcategory") {
+                        setSubategory(query.id);
+                        const subObj = subcategories.find(sub => sub.id === query.id);
+                        setCategory(subObj.category.id)
                 }
-        }
+        }, [query])
 
-        console.log(findTypeName(categories, subCategories, params.category));
 
         return (
                 <div>
-                        <SubcategoryFilter subCategories={subCategories} />
-                        {products && products.map(product => <ProductCard key={product.id} product={product} />)}
+                        <SubcategoryFilter subCategories={subcategories
+                                .filter(sub => sub.category.id === category)} />
+                        {products && products
+                                .filter(prod => prod.category.id === category)
+                                .filter(prod => subcategory ? prod.subcategory.id === subcategory : prod)
+                                .map(product => <ProductCard key={product.id} product={product} />)}
                 </div>
         )
 }
