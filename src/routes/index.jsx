@@ -25,12 +25,13 @@ const item = {
         __typename: "Category"
     },
     sizes: {
-        xs: 222,
-        s: 55,
+        xs: 0,
+        s: 0,
         m: 0,
-        l: 87,
+        l: 0,
         xl: 0,
-        xxl: 5758,
+        xxl: 0,
+        oneSize: 1,
         __typename: "Sizes"
     },
     description: `<pre>Повертаючи традицію на голову. Зроблена з лляно-бавовняної суміші, ця сорочка має ступінчастий подол з 
@@ -62,7 +63,7 @@ const Routes = () => {
                     )
                 }}
             />*/}
-            <Route exact path='/productDetail'><ProductDetailPage item={products.length ? products[0] : item}/></Route>
+            <Route exact path='/productDetail'><ProductDetailPage item={products.length ? products[10] : item}/></Route>
         </Switch>
     )
 }

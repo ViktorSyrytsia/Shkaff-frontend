@@ -21,6 +21,7 @@ client.query({
                     l
                     xl
                     xxl
+                    oneSize
                 }
                 rating {
                     value
