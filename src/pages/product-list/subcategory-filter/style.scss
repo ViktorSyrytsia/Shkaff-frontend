@@ -1,0 +1,19 @@
+.subcategory-filter {
+        &__container {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                // display: grid;
+                // grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                // grid-gap: 2vw;
+        }
+
+        &__item {
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 18px;
+                border: 2px solid black;
+                height: 50px;
+                text-align: center;
+                line-height: 45px;
+        }
+}

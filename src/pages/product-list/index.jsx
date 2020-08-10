@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
 
+import './style.scss';
 
 const ProductList = ({ location: { query } }) => {
 
@@ -25,15 +26,27 @@ const ProductList = ({ location: { query } }) => {
                 }
         }, [query])
 
+        const onSelectSubcategory = (id) => {
+                setSubategory(id)
+        }
 
         return (
                 <div>
-                        <SubcategoryFilter subCategories={subcategories
-                                .filter(sub => sub.category.id === category)} />
-                        {products && products
-                                .filter(prod => prod.category.id === category)
-                                .filter(prod => subcategory ? prod.subcategory.id === subcategory : prod)
-                                .map(product => <ProductCard key={product.id} product={product} />)}
+                        <div className="subcategory-filter__container">
+                                <SubcategoryFilter
+                                        onSelectSubcategory={onSelectSubcategory}
+                                        selected={subcategory}
+                                        subcategories={subcategories
+                                                .filter(sub => sub.category.id === category)} />
+                        </div>
+                        <div className="product-cards__container">
+                                <div className="product-cards__list">
+                                        {products && products
+                                                .filter(prod => prod.category.id === category)
+                                                .filter(prod => subcategory ? prod.subcategory.id === subcategory : prod)
+                                                .map(product => <ProductCard key={product.id} product={product} />)}
+                                </div>
+                        </div>
                 </div>
         )
 }
