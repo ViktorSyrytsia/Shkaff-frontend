@@ -1,14 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
-import App from '../components/app'
+import {Categories} from "../components";
 
 const Routes = () => {
 
     return (
         <Switch>
-            <Route exact path='/' component={App} />
+            <Route exact path='/' component={Categories} />
             <Route path='/:category'
                 exact
                 render={({ match }) => {

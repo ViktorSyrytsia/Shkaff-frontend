@@ -1,13 +1,17 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import {ConnectedRouter} from "connected-react-router";
 
 import { getCategories } from "../../redux/categories/categories.actions";
 import {getProducts} from "../../redux/products/products.actions";
 import {getSubcategories} from "../../redux/subcategories/subcategories.actions";
 import { Header } from '../../containers';
-import { Categories, Footer, LoadingPage } from '../index'
+import {Footer, LoadingPage } from '../index'
+import {history} from '../../store/store';
+import Routes from "../../routes";
 
 import 'semantic-ui-css/semantic.min.css'
+
 
 const App = () => {
     const dispatch = useDispatch();
@@ -32,12 +36,12 @@ const App = () => {
     }, [productsLoading, categoriesLoading, subcategoriesLoading])
 
     return (
-        <div>
+        <ConnectedRouter history={history}>
             <LoadingPage isVisible={loadingPageVisibility}/>
             <Header />
-            <Categories />
+            <Routes />
             <Footer />
-        </div>
+        </ConnectedRouter>
     )
 }
 
