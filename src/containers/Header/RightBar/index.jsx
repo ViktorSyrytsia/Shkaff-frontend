@@ -1,12 +1,14 @@
 import React from "react";
-import { Search, Icon } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 import {Link} from "react-router-dom";
+
+import {SearchBar} from '../../index'
 
 const RightBar = () => {
 
     return (
         <div className='header__right-bar'>
-            <Search className='search'/>
+        <SearchBar />
             <Link to='/wishlist'>
                 <Icon name='heart'/>
             </Link>
