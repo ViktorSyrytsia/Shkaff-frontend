@@ -6,7 +6,7 @@ import {ProductListPage, ProductDetailPage} from "../pages";
 import {useSelector} from "react-redux";
 
 const item = {
-    id: "5f1f25bebfa56026a4c88472",
+    id: "5f31c422c4f63146a8959b73",
     name: "Ray Banm",
     price: 19992,
     images: [
@@ -55,7 +55,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path='/' component={Categories}/>
-            <Route exact path='/productDetail'><ProductDetailPage item={products.length ? products[10] : item}/></Route>
+            <Route exact path='/productDetail'><ProductDetailPage product={products.length ? products[10] : item}/></Route>
             <Route exact path='/:category'
                    render={(routerProps) => {
 
