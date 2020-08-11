@@ -55,15 +55,16 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path='/' component={Categories}/>
-            {/*      <Route exact path='/:category'
-                render={(routerProps) => {
-
-                    return (
-                        <ProductListPage {...routerProps} />
-                    )
-                }}
-            />*/}
             <Route exact path='/productDetail'><ProductDetailPage item={products.length ? products[10] : item}/></Route>
+            <Route exact path='/:category'
+                   render={(routerProps) => {
+
+                       console.log(routerProps)
+                       return (
+                           <ProductListPage {...routerProps} />
+                       )
+                   }}
+            />
         </Switch>
     )
 }

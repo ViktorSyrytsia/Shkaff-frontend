@@ -10,7 +10,7 @@ const ProductDetailPage = ({item}) => {
 
     return (
         <div className='product-detail'>
-            <Breadcrumb/>
+            <Breadcrumb item={item}/>
             <div className='product-detail__item'>
                 <ImageViewer images={item.images}/>
                 <div className='product-detail__item__description'>
