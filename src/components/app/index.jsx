@@ -9,9 +9,9 @@ import { Header } from '../../containers';
 import {Footer, LoadingPage } from '../index'
 import {history} from '../../store/store';
 import Routes from "../../routes";
+import { clearLocalStorage } from '../../services/local-storage';
 
 import 'semantic-ui-css/semantic.min.css'
-
 
 const App = () => {
     const dispatch = useDispatch();
@@ -22,6 +22,10 @@ const App = () => {
     }))
 
     const [loadingPageVisibility, setLoadingPageVisibility] = useState(true)
+
+    if (!localStorage.getItem('shkaff')) {
+        clearLocalStorage();
+    }
 
     useEffect(() => {
         dispatch(getCategories())
