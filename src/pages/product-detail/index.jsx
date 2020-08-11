@@ -26,14 +26,7 @@ const ProductDetailPage = ({product}) => {
     }
 
     useEffect(() => {
-        if (wishlistItems.length ) {
-            console.log(wishlistItems[0].id)
-            console.log(product.id)
-        }
-        console.log('wishlist', wishlistItems)
-
         const checkedWishlistItem = wishlistItems.find(item => item.id === product.id)
-        console.log(checkedWishlistItem)
         checkedWishlistItem && setIsItemInWishlist(true)
     }, [wishlistItems, isItemInWishlist])
 
