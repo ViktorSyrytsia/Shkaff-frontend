@@ -4,12 +4,11 @@ import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
 import { Card, Menu } from 'semantic-ui-react';
 import { DropDown } from '../../components';
+import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage';
 
 import './style.scss';
 
 const ProductList = ({ location: { query }, match: { params } }) => {
-        const [category, setCategory] = useState(null);
-        const [subcategory, setSubategory] = useState(null);
 
         const { subcategories, products, router, categories } = useSelector(({ Products, Subcategories, router, Categories }) => ({
                 subcategories: Subcategories.list,
@@ -18,32 +17,87 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                 categories: Categories.list
         }))
 
+        const [categoryID, setCategoryID] = useState(null);
+        const [subcategoryID, setSubategoryID] = useState(null);
+        const [filtredProducts, setFiltredProducts] = useState(products);
+        const [sortedProducts, setSortedProducts] = useState(filtredProducts)
+
+        const [filter, setFilter] = useState('all');
+        const [sort, setSort] = useState('new');
+
+        useEffect(() => {
+                if (filter === 'all') {
+                        setFiltredProducts(products)
+                } else {
+                        setFiltredProducts(products.filter(prod => prod.sizes[filter] > 0));
+                }
+        }, [filter, products]);
+
+        useEffect(() => {
+                switch (sort) {
+                        case 'new':
+                                setSortedProducts(filtredProducts.sort((a, b) =>
+                                        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+                                break;
+                        case 'priceLow':
+                                setSortedProducts(filtredProducts.sort((a, b) =>
+                                        b.price - a.price))
+                                break;
+                        case 'priceHigh':
+                                setSortedProducts(filtredProducts.sort((a, b) =>
+                                        a.price - b.price))
+                                break;
+                        // case 'rating':
+                        //         setSortedProducts(filtredProducts.sort((a, b) =>
+                        //                 new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
+                        //         break;
+
+                        default:
+                                break;
+                }
+        }, [sort, filtredProducts])
+
         useEffect(() => {
 
                 if (query && query.__typename === "Category") {
-                        setCategory(query.id);
-                        setSubategory(null)
+                        setCategoryID(query.id);
+                        setSubategoryID(null)
                 } else if (query && query.__typename === "Subcategory") {
-                        setSubategory(query.id);
+                        setSubategoryID(query.id);
                         const subObj = subcategories.find(sub => sub.id === query.id);
-                        setCategory(subObj.category.id)
+                        setCategoryID(subObj.category.id)
                 }
 
         }, [query, subcategories])
 
         useEffect(() => {
                 const catObj = categories && categories.find(cat => cat.name === router[0].toUpperCase() + router.slice(1))
-                setCategory(catObj ? catObj.id : null)
+                setCategoryID(catObj ? catObj.id : null);
+
         }, [categories, router])
 
+        useEffect(() => {
+                setSubategoryID(getFromLocalStorage('currentSubcategory'));
+        }, [])
+
+
         const onSelectSubcategory = (id) => {
-                setSubategory(id)
+                setToLocalStorage('currentSubcategory', id);
+                setSubategoryID(id);
         }
 
+        const handleDropDown = (e, options, name) => {
+                if (name === 'Розмір') {
+                        setFilter(options.value)
+                } else {
+                        setSort(options.value)
+                }
+        }
 
         //================================================//
         const filterOptions = [
-                { key: 'oneSize', text: 'oneSize', value: 'oneSize' },
+                { key: 'all', text: 'Усі', value: 'all' },
+                { key: 'oneSize', text: 'Без розміру', value: 'oneSize' },
                 { key: 'xs', text: 'xs', value: 'xs' },
                 { key: 's', text: 's', value: 's' },
                 { key: 'm', text: 'm', value: 'm' },
@@ -55,9 +109,10 @@ const ProductList = ({ location: { query }, match: { params } }) => {
         const filterName = 'Розмір'
 
         const sortOptions = [
-                { key: 'ціною', text: 'ціною', value: 'ціною' },
-                { key: 'рейтингом', text: 'рейтингом', value: 'рейтингом' },
-                { key: 'датою', text: 'датою', value: 'датою' },
+                { key: 'priceLow', text: 'Спочатку дешевші', value: 'priceLow' },
+                { key: 'priceHigh', text: 'Спочатку дорожчі', value: 'priceHigh' },
+                { key: 'rating', text: 'Рейтингом', value: 'rating' },
+                { key: 'new', text: 'Новинки', value: 'new' },
         ]
 
         const sortName = 'Сортувати за'
@@ -68,19 +123,26 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                         <div className="subcategories-filter__container">
                                 <SubcategoryFilter
                                         onSelectSubcategory={onSelectSubcategory}
-                                        selected={subcategory}
+                                        selected={subcategoryID}
                                         subcategories={subcategories
-                                                .filter(sub => sub.category.id === category)} />
+                                                .filter(sub => sub.category.id === categoryID)} />
                         </div>
 
 
                         <div className="product-list__dropdown-section">
                                 <Menu>
                                         <Menu.Menu position='left'>
-                                                <DropDown name={filterName} options={filterOptions} />
+                                                <DropDown
+                                                        name={filterName}
+                                                        options={filterOptions}
+                                                        handleDropDown={handleDropDown}
+                                                />
                                         </Menu.Menu>
                                         <Menu.Menu position='right'>
-                                                <DropDown name={sortName} options={sortOptions} />
+                                                <DropDown
+                                                        name={sortName}
+                                                        options={sortOptions}
+                                                        handleDropDown={handleDropDown} />
                                         </Menu.Menu>
                                 </Menu>
                         </div>
@@ -89,9 +151,9 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                         <div className="product-cards__container">
                                 <div className="product-cards__list">
                                         <Card.Group itemsPerRow={4}>
-                                                {products && products
-                                                        .filter(prod => prod.category.id === category)
-                                                        .filter(prod => subcategory ? prod.subcategory.id === subcategory : prod)
+                                                {sortedProducts && filtredProducts
+                                                        .filter(prod => prod.category.id === categoryID)
+                                                        .filter(prod => subcategoryID ? prod.subcategory.id === subcategoryID : prod)
                                                         .map(product => <ProductCard key={product.id} product={product} />)}
 
                                         </Card.Group>

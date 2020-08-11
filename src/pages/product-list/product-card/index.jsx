@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Image, Rating, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom'
+
+import { linkGenerator } from "../../../utils";
 
 import './style.scss';
 
@@ -33,7 +36,11 @@ const ProductCard = ({ product }) => {
                                         <div className="rating-bar__rate">{`${rating.toFixed(1)}/10`}</div>
                                 </div>
                         </Card.Content>
-                        <Button color="black">Деталі</Button>
+                        <Button color="black">
+                                <Link to={{ pathname: linkGenerator(product), query: product }}>
+                                        Деталі
+                </Link>
+                        </Button>
                 </Card>
 
         )
