@@ -11,7 +11,6 @@ const SubcategoryFilter = ({ subcategories, selected, onSelectSubcategory }) => 
                                                 <Button
                                                         onClick={() => onSelectSubcategory(sc.id)}
                                                         key={sc.id}
-                                                        disabled={true}
                                                         color='black'>{sc.name}</Button>
                                         )
                                 } else {
@@ -19,8 +18,7 @@ const SubcategoryFilter = ({ subcategories, selected, onSelectSubcategory }) => 
                                                 <Button
                                                         onClick={() => onSelectSubcategory(sc.id)}
                                                         key={sc.id}
-                                                        disabled={false}
-                                                        color='black'>{sc.name}</Button>
+                                                        color='grey'>{sc.name}</Button>
                                         )
                                 }
                         })}

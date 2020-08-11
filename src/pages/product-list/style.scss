@@ -1,6 +1,23 @@
-.subcategory-filter__container {
+.product-list {
+  &__title {
+          font-size: 36px;
+        margin-top: 50px;
+        text-align: center;
+  }
+
+  &__container {
+        min-height: calc(100vh - 60px);
+        width: 1280px;
+        margin: 0 auto;
+}
+}
+
+.subcategories-filter__container {
         display: flex;
         justify-content: center;
+        // padding-bottom: 40px;
+        // // border-bottom: 2px solid rgb(235, 235, 235);
+        margin-bottom: 20px;
 }
 
 .product-cards__container {
@@ -9,10 +26,11 @@
 }
 
 .product-cards__list {
-        height: 100vh;
         width: 1280px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: flex-start;
+     
+}
+
+.product-list__dropdown-section {
+     
+        margin: 20px auto;
 }

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
+import { Card, Menu, Dropdown } from 'semantic-ui-react';
 
 import './style.scss';
 
-const ProductList = ({ location: { query } }) => {
+const ProductList = ({ location: { query }, match: { params } }) => {
 
         const [category, setCategory] = useState(null);
         const [subcategory, setSubategory] = useState(null);
@@ -30,21 +31,46 @@ const ProductList = ({ location: { query } }) => {
                 setSubategory(id)
         }
 
+
         return (
-                <div>
-                        <div className="subcategory-filter__container">
+                <div className="product-list__container">
+                        <div className="product-list__title">{params.subcategory.toUpperCase()}</div>
+                        <div className="subcategories-filter__container">
                                 <SubcategoryFilter
                                         onSelectSubcategory={onSelectSubcategory}
                                         selected={subcategory}
                                         subcategories={subcategories
                                                 .filter(sub => sub.category.id === category)} />
                         </div>
+                        <div className="product-list__dropdown-section">
+                                <Menu>
+                                        <Dropdown
+                                                item
+                                                simple
+                                                text='Розмір'
+                                                direction='right'
+                                                options={subcategories && subcategories}
+                                        />
+                                        <Menu.Menu position='right'>
+                                                <Dropdown
+                                                        item
+                                                        simple
+                                                        text='Сортувати за'
+                                                        direction='right'
+                                                        options={subcategories && subcategories}
+                                                />
+                                        </Menu.Menu>
+                                </Menu>
+                        </div>
                         <div className="product-cards__container">
                                 <div className="product-cards__list">
-                                        {products && products
-                                                .filter(prod => prod.category.id === category)
-                                                .filter(prod => subcategory ? prod.subcategory.id === subcategory : prod)
-                                                .map(product => <ProductCard key={product.id} product={product} />)}
+                                        <Card.Group itemsPerRow={4}>
+                                                {products && products
+                                                        .filter(prod => prod.category.id === category)
+                                                        .filter(prod => subcategory ? prod.subcategory.id === subcategory : prod)
+                                                        .map(product => <ProductCard key={product.id} product={product} />)}
+
+                                        </Card.Group>
                                 </div>
                         </div>
                 </div>

@@ -1,0 +1,12 @@
+.product-card {
+        &__name {
+                font-weight: bolder;
+                font-size: 18px;
+        }
+
+        &__price {
+                margin-top: 10px;
+                font-size: 14px;
+                color: rgb(122, 122, 122);
+        }
+}
