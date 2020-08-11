@@ -1,26 +1,3 @@
-.search {
-  position: relative;
-
-  input {
-    border-radius: 20px;
-    height: 30px;
-    outline: none;
-    border: 1px solid #868686;
-    padding: 10px 30px 10px 10px;
-
-    &:focus {
-      border: 1px solid #c3c3c3;
-
-    }
-  }
-
-  i {
-    color: #545454;
-    position: relative;
-    left: -25px;
-  }
-}
-
 .search-list {
   position: absolute;
   top: 60px;

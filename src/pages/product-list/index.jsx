@@ -8,9 +8,6 @@ import { DropDown } from '../../components';
 import './style.scss';
 
 const ProductList = ({ location: { query }, match: { params } }) => {
-
-
-
         const [category, setCategory] = useState(null);
         const [subcategory, setSubategory] = useState(null);
 
@@ -67,7 +64,7 @@ const ProductList = ({ location: { query }, match: { params } }) => {
 
         return (
                 <div className="product-list__container">
-                        <div className="product-list__title">{params.subcategory.toUpperCase()}</div>
+                        <div className="product-list__title">{params.category.toUpperCase()}</div>
                         <div className="subcategories-filter__container">
                                 <SubcategoryFilter
                                         onSelectSubcategory={onSelectSubcategory}
