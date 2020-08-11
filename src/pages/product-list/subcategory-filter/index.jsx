@@ -9,6 +9,8 @@ const SubcategoryFilter = ({ subcategories, selected, onSelectSubcategory }) => 
                                 if (sc.id === selected) {
                                         return (
                                                 <Button
+
+                                                        size="huge"
                                                         onClick={() => onSelectSubcategory(sc.id)}
                                                         key={sc.id}
                                                         color='black'>{sc.name}</Button>
@@ -16,6 +18,7 @@ const SubcategoryFilter = ({ subcategories, selected, onSelectSubcategory }) => 
                                 } else {
                                         return (
                                                 <Button
+                                                        size="huge"
                                                         onClick={() => onSelectSubcategory(sc.id)}
                                                         key={sc.id}
                                                         color='grey'>{sc.name}</Button>

@@ -5,11 +5,12 @@ import './style.scss';
 
 const ProductCard = ({ product }) => {
 
-        const [rating, setRating] = useState(9);
+        const [rating, setRating] = useState(10);
 
         useEffect(() => {
+
                 if (product && product.rating.length > 0) {
-                        setRating(product.rating.reduce((a, b) => a + b, 0) / product.rating.length);
+                        setRating(product.rating.reduce((a, b) => a + b.value, 0) / product.rating.length);
                 }
         }, [product])
 
@@ -27,7 +28,10 @@ const ProductCard = ({ product }) => {
                                 </Card.Content>
                         </Card.Content>
                         <Card.Content extra>
-                                <Rating maxRating={10} defaultRating={rating} icon='star' />
+                                <div className="rating-bar">
+                                        <div className="rating-bar__text">Рейтинг:</div>
+                                        <div className="rating-bar__rate">{`${rating.toFixed(1)}/10`}</div>
+                                </div>
                         </Card.Content>
                         <Button color="black">Деталі</Button>
                 </Card>

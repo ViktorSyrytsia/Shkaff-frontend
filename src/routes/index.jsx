@@ -11,9 +11,6 @@ const Routes = () => {
             <Route exact path='/' component={Categories} />
             <Route exact path='/:subcategory'
                 render={(routerProps) => {
-
-
-                    console.log(routerProps)
                     return (
                         <ProductList {...routerProps} />
                     )

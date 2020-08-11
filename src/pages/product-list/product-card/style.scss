@@ -10,3 +10,18 @@
                 color: rgb(122, 122, 122);
         }
 }
+
+.rating-bar {
+        display: flex;
+
+        &__text {
+                margin-right: 10px;
+        }
+
+        &__rate {
+                font-size: 18px;
+                font-weight: bold;
+                color: rgb(58, 58, 58);
+        }
+}
+
