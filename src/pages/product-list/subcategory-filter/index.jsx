@@ -1,9 +1,30 @@
-import React from 'react'
+import React from 'react';
+import { Button } from 'semantic-ui-react';
+import './style.scss';
 
-const SubcategoryFilter = ({ subCategories }) => {
+const SubcategoryFilter = ({ subcategories, selected, onSelectSubcategory }) => {
         return (
-                <div>
-                        {subCategories && subCategories.map(sc => <div key={sc.id}>{sc.name}</div>)}
+                <div className="subcategory-filter__container">
+                        {subcategories && subcategories.map((sc) => {
+                                if (sc.id === selected) {
+                                        return (
+                                                <Button
+
+                                                        size="huge"
+                                                        onClick={() => onSelectSubcategory(sc.id)}
+                                                        key={sc.id}
+                                                        color='black'>{sc.name}</Button>
+                                        )
+                                } else {
+                                        return (
+                                                <Button
+                                                        size="huge"
+                                                        onClick={() => onSelectSubcategory(sc.id)}
+                                                        key={sc.id}
+                                                        color='grey'>{sc.name}</Button>
+                                        )
+                                }
+                        })}
                 </div>
         )
 }

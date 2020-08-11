@@ -1,32 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Image, Rating, Button } from 'semantic-ui-react';
-const product = {
-        _id: '213123sdasd12',
-        images: [],
-        rating: [],
-        name: 'Test product name',
-        price: 1992,
-        description: 'Hello, here must be some description text',
-        sizes: { xs: 2, s: 0, m: 1, l: 1, xl: 0, xxl: 0 }
-}
+
+import './style.scss';
 
 const ProductCard = ({ product }) => {
+
+        const [rating, setRating] = useState(10);
+
+        useEffect(() => {
+
+                if (product && product.rating.length > 0) {
+                        setRating(product.rating.reduce((a, b) => a + b.value, 0) / product.rating.length);
+                }
+        }, [product])
+
         return (
                 <Card>
-                        <Image src={product.images[0]} wrapped ui={false} />
+                        <Image src={product.images[0].link} wrapped ui={false} />
                         <Card.Content>
-                                <Card.Header>{product.name}</Card.Header>
-                                <Card.Meta>
-                                        <span className='date'>{product.price}</span>
-                                </Card.Meta>
-                                <Card.Description>
-                                        {product.description}
-                                </Card.Description>
+                                <Card.Content>
+                                        <div className="product-card__name">
+                                                {product.name}
+                                        </div>
+                                        <div className="product-card__price">
+                                                {`Ціна: ${product.price} грн.`}
+                                        </div>
+                                </Card.Content>
                         </Card.Content>
                         <Card.Content extra>
-                                <Rating maxRating={5} defaultRating={3} icon='star' />
+                                <div className="rating-bar">
+                                        <div className="rating-bar__text">Рейтинг:</div>
+                                        <div className="rating-bar__rate">{`${rating.toFixed(1)}/10`}</div>
+                                </div>
                         </Card.Content>
-                        <Button>Купити</Button>
+                        <Button color="black">Деталі</Button>
                 </Card>
 
         )

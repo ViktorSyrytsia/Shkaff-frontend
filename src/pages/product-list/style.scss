@@ -1,0 +1,37 @@
+.product-list {
+  &__title {
+          font-size: 36px;
+        margin-top: 50px;
+        text-align: center;
+  }
+
+  &__container {
+        min-height: calc(100vh - 60px);
+        width: 1280px;
+        margin: 0 auto;
+}
+}
+
+.subcategories-filter__container {
+        display: flex;
+        justify-content: center;
+        // padding-bottom: 40px;
+        // // border-bottom: 2px solid rgb(235, 235, 235);
+        margin-bottom: 50px;
+        margin-top: 40px;
+}
+
+.product-cards__container {
+        display: flex;
+        justify-content: center;
+}
+
+.product-cards__list {
+        width: 1280px;
+     
+}
+
+.product-list__dropdown-section {
+     
+        margin: 20px auto;
+}

@@ -34,9 +34,9 @@ const item = {
         oneSize: 1,
         __typename: "Sizes"
     },
-    description: `Повертаючи традицію на голову. Зроблена з лляно-бавовняної суміші, ця сорочка має ступінчастий подол з 
+    description: `Повертаючи традицію на голову. Зроблена з лляно-бавовняної суміші, ця сорочка має ступінчастий подол з
     бічними прорізами.
-    
+
         - Прямо підходить
         - Відкритий комір
         - Кнопка спереду
@@ -55,7 +55,10 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path='/' component={Categories}/>
-            <Route exact path='/productDetail'><ProductDetailPage product={products.length ? products[10] : item}/></Route>
+            <Route exact path='/productDetail'>
+                <ProductDetailPage product={products.length ? products[10] : item}/>
+                </Route>
+            <Route exact path='/' component={Categories} />
             <Route exact path='/:category'
                    render={(routerProps) => {
 
