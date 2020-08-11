@@ -55,6 +55,23 @@
         white-space: pre-line
       }
 
+      .sizes {
+        position: relative;
+        margin: 10px 0;
+
+        &__selected {
+          background: #1b1c1d !important;
+          color: white !important;
+        }
+
+        &__error {
+          color: #e30000;
+          font-size: .8em;
+          position: absolute;
+          bottom: -20px;
+        }
+      }
+
       .to-order {
         margin: 40px 0;
         display: flex;
@@ -71,7 +88,25 @@
         }
 
         i.selected {
-          color: crimson;
+          color: #e30000;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 991px){
+  .product-detail {
+    &__item {
+      flex-direction: column;
+      &__images {
+        justify-content: center;
+      }
+
+      .sizes {
+        .ui.buttons {
+          display: block;
+          flex-flow: wrap;
         }
       }
     }

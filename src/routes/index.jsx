@@ -57,8 +57,8 @@ const Routes = () => {
             <Route exact path='/' component={Categories}/>
             <Route exact path='/productDetail'>
                 <ProductDetailPage product={products.length ? products[10] : item}/>
-                </Route>
-            <Route exact path='/' component={Categories} />
+            </Route>
+            <Route exact path='/' component={Categories}/>
             <Route exact path='/:category'
                    render={(routerProps) => {
 

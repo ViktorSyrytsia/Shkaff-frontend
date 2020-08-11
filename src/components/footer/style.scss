@@ -1,15 +1,16 @@
 .footer-container {
         padding: 50px;
+        border-top: 1px solid silver;
 }
 
 .footer-list {
         display: flex;
         justify-content: center;
-        
+
         &__item {
-                flex-basis: 20%; 
+                flex-basis: 20%;
                 text-align: center;
-             
+
 
                 &-content{
                         display: block;

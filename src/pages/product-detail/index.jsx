@@ -14,6 +14,8 @@ const ProductDetailPage = ({product}) => {
     const wishlistItems = useSelector(({Wishlist}) => Wishlist.list)
 
     const [isItemInWishlist, setIsItemInWishlist] = useState(false)
+    const [selectedSize, setSelectedSize] = useState(null)
+    const [isSizeErrorVisible, setIsSizeErrorVisible] = useState(false)
 
     const onAddToWishlist = () => {
         if (isItemInWishlist) {
@@ -23,6 +25,15 @@ const ProductDetailPage = ({product}) => {
             dispatch(addItemToWishlist(product))
             setIsItemInWishlist(true)
         }
+    }
+
+    const onAddToCart = () => {
+        if (!selectedSize) {
+            setIsSizeErrorVisible(true)
+            return
+        }
+
+        //dispatch(addItemToCart(product))
     }
 
     useEffect(() => {
@@ -39,9 +50,14 @@ const ProductDetailPage = ({product}) => {
                     <h1>{product.name}</h1>
                     <div className={'price'}>{product.price} UAH</div>
                     <pre dangerouslySetInnerHTML={{__html: product.description}}/>
-                    <Sizes sizes={product.sizes}/>
+                    <Sizes sizes={product.sizes}
+                           selectedSize={selectedSize}
+                           setSelectedSize={setSelectedSize}
+                           isSizeErrorVisible={isSizeErrorVisible}
+                           setIsSizeErrorVisible={setIsSizeErrorVisible}
+                    />
                     <div className='to-order'>
-                        <Button size='big' color='black'>Купити</Button>
+                        <Button size='big' color='black' onClick={onAddToCart}>Купити</Button>
                         <Icon className={isItemInWishlist ? 'selected' : ''}
                               name={isItemInWishlist ? 'heart' : 'heart outline'}
                               onClick={onAddToWishlist}/>
