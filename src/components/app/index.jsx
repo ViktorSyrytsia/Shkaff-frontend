@@ -14,12 +14,14 @@ import { clearLocalStorage } from '../../services/local-storage';
 import 'semantic-ui-css/semantic.min.css'
 import {getWishlist} from "../../redux/wishlist/wishlist.actions";
 
+
 const App = () => {
     const dispatch = useDispatch();
-    const {productsLoading, categoriesLoading, subcategoriesLoading} = useSelector(({Products, Categories, Subcategories}) => ({
+    const {productsLoading, categoriesLoading, subcategoriesLoading, router} = useSelector(({Products, Categories, Subcategories, router}) => ({
         productsLoading: Products.loading,
         categoriesLoading: Categories.loading,
         subcategoriesLoading: Subcategories.loading,
+        router: router,
     }))
 
     const [loadingPageVisibility, setLoadingPageVisibility] = useState(true)

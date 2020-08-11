@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
 import { Card, Menu } from 'semantic-ui-react';
@@ -19,7 +19,6 @@ const ProductList = ({ location: { query }, match: { params } }) => {
         }))
 
         useEffect(() => {
-
                 if (query && query.__typename === "Category") {
                         setCategory(query.id);
                         setSubategory(null)

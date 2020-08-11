@@ -2,7 +2,7 @@ import React from "react";
 import {Breadcrumb as MaterialBreadcrumb} from 'semantic-ui-react'
 import {Link} from "react-router-dom";
 
-import {toLowerCase} from "../../../utils";
+import {linkGenerator} from "../../../utils";
 
 const Breadcrumb = ({item: {category, subcategory, name}}) => {
 
@@ -12,11 +12,11 @@ const Breadcrumb = ({item: {category, subcategory, name}}) => {
                 Головна
             </Link>
             <MaterialBreadcrumb.Divider/>
-            <Link to={{pathname: toLowerCase(category.name), query: category}}>
+            <Link to={{pathname: linkGenerator(category), query: category}}>
                 {category.name}
             </Link>
             <MaterialBreadcrumb.Divider/>
-            <Link to={{pathname: toLowerCase(category.name), query: subcategory}}>
+            <Link to={{pathname: linkGenerator(category), query: subcategory}}>
                 {subcategory.name}
             </Link>
             <MaterialBreadcrumb.Divider/>
