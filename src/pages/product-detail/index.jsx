@@ -18,6 +18,7 @@ const ProductDetailPage = ({productId}) => {
     }))
 
     const [product, setProduct] = useState(null)
+    const [productAvailable, setProductAvailable] = useState(true)
     const [isItemInWishlist, setIsItemInWishlist] = useState(false)
     const [selectedSize, setSelectedSize] = useState(null)
     const [isSizeErrorVisible, setIsSizeErrorVisible] = useState(false)
@@ -32,8 +33,13 @@ const ProductDetailPage = ({productId}) => {
         if (product) {
             const checkedWishlistItem = wishlistItems.find(item => item.id === product.id)
             checkedWishlistItem && setIsItemInWishlist(true)
+
+            const sizes = Object.values(product.sizes);
+            sizes.pop()
+            setProductAvailable(sizes.some( item  => item))
         }
-    }, [wishlistItems, isItemInWishlist, product])
+    }, [wishlistItems, isItemInWishlist, product, productAvailable])
+
 
     const onAddToWishlist = () => {
         if (isItemInWishlist) {
@@ -72,11 +78,12 @@ const ProductDetailPage = ({productId}) => {
                                    isSizeErrorVisible={isSizeErrorVisible}
                                    setIsSizeErrorVisible={setIsSizeErrorVisible}/>
                             <div className='to-order'>
-                                <Button size='big' color='black' onClick={onAddToCart}>Купити</Button>
+                                <Button disabled={!productAvailable} size='big' color='black' onClick={onAddToCart}>Купити</Button>
                                 <Icon className={isItemInWishlist ? 'selected' : ''}
                                       name={isItemInWishlist ? 'heart' : 'heart outline'}
                                       onClick={onAddToWishlist}/>
                             </div>
+                            {!productAvailable && <div>Немає в наявності</div>}
                         </div>
                     </div>
                 </>
