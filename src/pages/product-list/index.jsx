@@ -19,43 +19,6 @@ const ProductList = ({ location: { query }, match: { params } }) => {
 
         const [categoryID, setCategoryID] = useState(null);
         const [subcategoryID, setSubategoryID] = useState(null);
-        const [filtredProducts, setFiltredProducts] = useState(products);
-        const [sortedProducts, setSortedProducts] = useState(filtredProducts)
-
-        const [filter, setFilter] = useState('all');
-        const [sort, setSort] = useState('new');
-
-        useEffect(() => {
-                if (filter === 'all') {
-                        setFiltredProducts(products)
-                } else {
-                        setFiltredProducts(products.filter(prod => prod.sizes[filter] > 0));
-                }
-        }, [filter, products]);
-
-        useEffect(() => {
-                switch (sort) {
-                        case 'new':
-                                setSortedProducts(filtredProducts.sort((a, b) =>
-                                        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
-                                break;
-                        case 'priceLow':
-                                setSortedProducts(filtredProducts.sort((a, b) =>
-                                        b.price - a.price))
-                                break;
-                        case 'priceHigh':
-                                setSortedProducts(filtredProducts.sort((a, b) =>
-                                        a.price - b.price))
-                                break;
-                        // case 'rating':
-                        //         setSortedProducts(filtredProducts.sort((a, b) =>
-                        //                 new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
-                        //         break;
-
-                        default:
-                                break;
-                }
-        }, [sort, filtredProducts])
 
         useEffect(() => {
 
@@ -80,18 +43,14 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                 setSubategoryID(getFromLocalStorage('currentSubcategory'));
         }, [])
 
-
         const onSelectSubcategory = (id) => {
                 setToLocalStorage('currentSubcategory', id);
                 setSubategoryID(id);
         }
 
+
         const handleDropDown = (e, options, name) => {
-                if (name === 'Розмір') {
-                        setFilter(options.value)
-                } else {
-                        setSort(options.value)
-                }
+                console.log(options.value);
         }
 
         //================================================//
@@ -151,7 +110,7 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                         <div className="product-cards__container">
                                 <div className="product-cards__list">
                                         <Card.Group itemsPerRow={4}>
-                                                {sortedProducts && filtredProducts
+                                                {products && products
                                                         .filter(prod => prod.category.id === categoryID)
                                                         .filter(prod => subcategoryID ? prod.subcategory.id === subcategoryID : prod)
                                                         .map(product => <ProductCard key={product.id} product={product} />)}

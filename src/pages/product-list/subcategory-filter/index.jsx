@@ -5,6 +5,11 @@ import './style.scss';
 const SubcategoryFilter = ({ subcategories, selected, onSelectSubcategory }) => {
         return (
                 <div className="subcategory-filter__container">
+                        <Button
+                                size="huge"
+                                basic
+                                onClick={() => onSelectSubcategory(null)}
+                                color='black'>Усі</Button>
                         {subcategories && subcategories.map((sc) => {
                                 if (sc.id === selected) {
                                         return (
@@ -25,6 +30,7 @@ const SubcategoryFilter = ({ subcategories, selected, onSelectSubcategory }) => 
                                         )
                                 }
                         })}
+
                 </div>
         )
 }
