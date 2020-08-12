@@ -50,7 +50,7 @@ const ProductDetailPage = ({productId}) => {
             return
         }
 
-        //dispatch(addItemToCart(product))
+        //dispatch(addItemToCart({...product, selectedSize}))
     }
 
     return (
