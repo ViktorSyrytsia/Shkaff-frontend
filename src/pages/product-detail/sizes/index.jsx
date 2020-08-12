@@ -6,7 +6,7 @@ const Sizes = ({sizes, selectedSize, setSelectedSize, isSizeErrorVisible, setIsS
     sizesArray.pop()
 
     const handleClick = (e, value) => {
-        setSelectedSize(value)
+        setSelectedSize(value.toUpperCase())
         setIsSizeErrorVisible(false)
     }
 
@@ -18,8 +18,8 @@ const Sizes = ({sizes, selectedSize, setSelectedSize, isSizeErrorVisible, setIsS
                         <Button onClick={(e) => handleClick(e, value)}
                                 key={value}
                                 disabled={!sizes[value]}
-                                className={selectedSize === value ? 'sizes__selected' : ''}>
-                            {value === 'oneSize' ? 'one size' : value}
+                                className={selectedSize && selectedSize.toLowerCase() === value ? 'sizes__selected' : ''}>
+                            {value === 'oneSize' ? 'ONE SIZE' : value.toUpperCase()}
                         </Button>
                     ))
                 }

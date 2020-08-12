@@ -3,6 +3,7 @@ import {Button, Icon} from 'semantic-ui-react'
 import {useDispatch, useSelector} from "react-redux";
 
 import {addItemToWishlist, removeItemFromWishlist} from "../../redux/wishlist/wishlist.actions";
+import {addItemToCart} from "../../redux/cart/cart.actions";
 import Breadcrumb from './breadcrumb'
 import ImageViewer from './image-viewer'
 import Sizes from './sizes'
@@ -50,7 +51,7 @@ const ProductDetailPage = ({productId}) => {
             return
         }
 
-        //dispatch(addItemToCart({...product, selectedSize}))
+        dispatch(addItemToCart({...product, selectedSize, quantity: 1}))
     }
 
     return (

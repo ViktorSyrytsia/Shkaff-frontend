@@ -16,7 +16,6 @@ const Wishlist = () => {
     const [wishlistVisibility, setWishlistVisibility] = useState(false)
 
     const onModalAction = (item) => {
-        console.log(item)
         item && dispatch(removeItemFromWishlist(item.id))
     }
 

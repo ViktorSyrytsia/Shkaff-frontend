@@ -45,6 +45,9 @@
           background: inherit;
           height: fit-content;
           padding: 0;
+          &:hover {
+            color: #0088cc !important;
+          }
         }
 
         i.trash {
