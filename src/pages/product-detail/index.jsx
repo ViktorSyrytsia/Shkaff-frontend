@@ -32,11 +32,11 @@ const ProductDetailPage = ({productId}) => {
             const checkedWishlistItem = wishlistItems.find(item => item.id === product.id)
             checkedWishlistItem && setIsItemInWishlist(true)
         }
-    }, [wishlistItems, isItemInWishlist])
+    }, [wishlistItems, isItemInWishlist, product])
 
     const onAddToWishlist = () => {
         if (isItemInWishlist) {
-            dispatch(removeItemFromWishlist(product))
+            dispatch(removeItemFromWishlist(product.id))
             setIsItemInWishlist(false)
         } else {
             dispatch(addItemToWishlist(product))

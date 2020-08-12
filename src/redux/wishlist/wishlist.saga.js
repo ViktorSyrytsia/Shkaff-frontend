@@ -27,7 +27,7 @@ function* handleAddWishlistItem({ payload }) {
 
 function* handleRemoveWishlistItem({ payload }) {
     const wishlist = getFromLocalStorage('wishlist');
-    const newWishlist = wishlist.filter((item) => item._id !== payload._id);
+    const newWishlist = wishlist.filter((item) => item.id !== payload);
 
     setToLocalStorage('wishlist', newWishlist);
     yield put(setWishlist(newWishlist));

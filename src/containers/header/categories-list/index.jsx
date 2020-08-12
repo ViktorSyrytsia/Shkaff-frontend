@@ -1,20 +1,21 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {toLowerCase} from "../../../utils";
+
+import {linkGenerator} from "../../../utils";
 
 const CategoriesList = ({list}) => {
 
     return (
-        <ul className='header__categories-list'>
+        <ul className='main-header__categories-list'>
             {list.map(category => (
                 <li key={category.id}>
-                    <Link to={{pathname: toLowerCase(category.name), query: category}}>
+                    <Link to={{pathname: linkGenerator(category), query: category}}>
                         {category.name}
                     </Link>
-                    <ul className='header__subcategories-list'>
+                    <ul className='main-header__subcategories-list'>
                         {category.subcategories.map(subcategory => (
                             <li key={subcategory.id}>
-                                <Link to={{pathname: toLowerCase(category.name), query: subcategory}}>
+                                <Link to={{pathname: linkGenerator(category), query: subcategory}}>
                                     {subcategory.name}
                                 </Link>
                             </li>

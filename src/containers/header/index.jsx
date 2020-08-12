@@ -7,13 +7,12 @@ import RightBar from "./right-bar";
 import './style.scss'
 
 const Header = () => {
-    const dispatch = useDispatch();
     const categories = useSelector(({ Categories }) => Categories.list);
 
     return (
-        <div className='header'>
+        <div className='main-header'>
             <Link to='/'>
-                <h1 className='header__logo'>Shkaff</h1>
+                <h1 className='main-header__logo'>Shkaff</h1>
             </Link>
             <CategoriesList list={categories} />
             <RightBar />
