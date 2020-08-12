@@ -1,18 +1,18 @@
 import React from "react";
-import {Route, Switch} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-import {Categories} from "../components";
-import {ProductListPage, ProductDetailPage} from "../pages";
-import {useSelector} from "react-redux";
+import { Categories } from "../components";
+import { ProductListPage, ProductDetailPage } from "../pages";
+import { useSelector } from "react-redux";
 
 const item = {
     id: "5f31c422c4f63146a8959b73",
     name: "Ray Banm",
     price: 19992,
     images: [
-        {link: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRp6h0ks08-UuDec8LOOBTq-pRcYcW1GyVGEg&usqp=CAU"},
-        {link: "https://www.optika.ua/media/Oprava-Ray-Ban-RB7029-5260.jpg"},
-        {link: "https://ochki.ua/wa-data/public/shop/products/67/89/38967/images/57984/Ray-Ban-Hexagonal-Flat-Lenses-RB3548N-001-30.970.jpg"},
+        { link: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRp6h0ks08-UuDec8LOOBTq-pRcYcW1GyVGEg&usqp=CAU" },
+        { link: "https://www.optika.ua/media/Oprava-Ray-Ban-RB7029-5260.jpg" },
+        { link: "https://ochki.ua/wa-data/public/shop/products/67/89/38967/images/57984/Ray-Ban-Hexagonal-Flat-Lenses-RB3548N-001-30.970.jpg" },
     ],
     subcategory: {
         id: "5f1f25acbfa56026a4c88471",
@@ -50,23 +50,21 @@ const item = {
 }
 
 const Routes = () => {
-    const products = useSelector(({Products}) => Products.list)
+    const products = useSelector(({ Products }) => Products.list)
 
     return (
         <Switch>
-            <Route exact path='/' component={Categories}/>
+            <Route exact path='/' component={Categories} />
             <Route exact path='/productDetail'>
-                <ProductDetailPage product={products.length ? products[10] : item}/>
-                </Route>
+                <ProductDetailPage product={products.length ? products[10] : item} />
+            </Route>
             <Route exact path='/' component={Categories} />
             <Route exact path='/:category'
-                   render={(routerProps) => {
-
-                       console.log(routerProps)
-                       return (
-                           <ProductListPage {...routerProps} />
-                       )
-                   }}
+                render={(routerProps) => {
+                    return (
+                        <ProductListPage {...routerProps} />
+                    )
+                }}
             />
         </Switch>
     )

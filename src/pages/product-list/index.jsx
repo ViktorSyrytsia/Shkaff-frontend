@@ -5,8 +5,12 @@ import ProductCard from './product-card';
 import { Card, Menu } from 'semantic-ui-react';
 import { DropDown } from '../../components';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage';
+import { productFilterObject, productSortObject } from '../../constants';
+
 
 import './style.scss';
+
+console.log(productFilterObject);
 
 const ProductList = ({ location: { query }, match: { params } }) => {
 
@@ -19,9 +23,10 @@ const ProductList = ({ location: { query }, match: { params } }) => {
 
         const [categoryID, setCategoryID] = useState(null);
         const [subcategoryID, setSubategoryID] = useState(null);
+        const [productFilter, setProductFilter] = useState('all');
+        const [productSort, setProductSort] = useState('new');
 
         useEffect(() => {
-
                 if (query && query.__typename === "Category") {
                         setCategoryID(query.id);
                         setSubategoryID(null)
@@ -30,51 +35,27 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                         const subObj = subcategories.find(sub => sub.id === query.id);
                         setCategoryID(subObj.category.id)
                 }
-
         }, [query, subcategories])
+
 
         useEffect(() => {
                 const catObj = categories && categories.find(cat => cat.name === router[0].toUpperCase() + router.slice(1))
                 setCategoryID(catObj ? catObj.id : null);
-
         }, [categories, router])
 
         useEffect(() => {
                 setSubategoryID(getFromLocalStorage('currentSubcategory'));
         }, [])
 
+
         const onSelectSubcategory = (id) => {
                 setToLocalStorage('currentSubcategory', id);
                 setSubategoryID(id);
         }
 
-
         const handleDropDown = (e, options, name) => {
-                console.log(options.value);
+                name === 'Розміри' ? setProductFilter(options.value) : setProductSort(options.value);
         }
-
-        //================================================//
-        const filterOptions = [
-                { key: 'all', text: 'Усі', value: 'all' },
-                { key: 'oneSize', text: 'Без розміру', value: 'oneSize' },
-                { key: 'xs', text: 'xs', value: 'xs' },
-                { key: 's', text: 's', value: 's' },
-                { key: 'm', text: 'm', value: 'm' },
-                { key: 'l', text: 'l', value: 'l' },
-                { key: 'xl', text: 'xl', value: 'xl' },
-                { key: 'xxl', text: 'xxl', value: 'xxl' }
-        ]
-
-        const filterName = 'Розмір'
-
-        const sortOptions = [
-                { key: 'priceLow', text: 'Спочатку дешевші', value: 'priceLow' },
-                { key: 'priceHigh', text: 'Спочатку дорожчі', value: 'priceHigh' },
-                { key: 'rating', text: 'Рейтингом', value: 'rating' },
-                { key: 'new', text: 'Новинки', value: 'new' },
-        ]
-
-        const sortName = 'Сортувати за'
 
         return (
                 <div className="product-list__container">
@@ -92,15 +73,15 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                                 <Menu>
                                         <Menu.Menu position='left'>
                                                 <DropDown
-                                                        name={filterName}
-                                                        options={filterOptions}
+                                                        name={productFilterObject.filterName}
+                                                        options={productFilterObject.filterOptions}
                                                         handleDropDown={handleDropDown}
                                                 />
                                         </Menu.Menu>
                                         <Menu.Menu position='right'>
                                                 <DropDown
-                                                        name={sortName}
-                                                        options={sortOptions}
+                                                        name={productSortObject.sortName}
+                                                        options={productSortObject.sortOptions}
                                                         handleDropDown={handleDropDown} />
                                         </Menu.Menu>
                                 </Menu>
@@ -113,8 +94,15 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                                                 {products && products
                                                         .filter(prod => prod.category.id === categoryID)
                                                         .filter(prod => subcategoryID ? prod.subcategory.id === subcategoryID : prod)
-                                                        .map(product => <ProductCard key={product.id} product={product} />)}
-
+                                                        .filter(prod => productFilter === 'all' ? prod : prod.sizes[productFilter] > 0)
+                                                        .sort((a, b) => productSort === 'new' && new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                                                        .sort((a, b) => productSort === 'priceLow' && a.price - b.price)
+                                                        .sort((a, b) => productSort === 'priceHigh' && b.price - a.price)
+                                                        .sort((a, b) => productSort === 'rating' &&
+                                                                (b.rating.reduce((a, b) => a + b.value, 0) / b.rating.length) -
+                                                                a.rating.reduce((a, b) => a + b.value, 0) / a.rating.length)
+                                                        .map(product => <ProductCard key={product.id} product={product} />)
+                                                }
                                         </Card.Group>
                                 </div>
                         </div>
