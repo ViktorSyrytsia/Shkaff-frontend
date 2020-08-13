@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Image, Rating, Button } from 'semantic-ui-react';
+import { Card, Image, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 
 import { linkGenerator } from "../../../utils";
@@ -17,36 +17,29 @@ const ProductCard = ({ product }) => {
         }, [product])
 
         return (
+                <Link className="ui card" to={{ pathname: linkGenerator(product), query: product }}>
+                        <Image src={product.images[0].link} wrapped ui={false} />
+                        <Card.Content>
+                                <div className="product-card__name">
+                                        {product.name}
+                                </div>
 
-                <Card>
-                                <Image src={product.images[0].link} wrapped ui={false} />
-                                        <Card.Content>
-                                               <div className="product-card__name">
-                                                <Link to={{ pathname: linkGenerator(product), query: product }}>
-                                                        {product.name}
-                                                        </Link>
-                                            </div>
-
-                                           <div className="rating-bar">
-                                           <div className="rating-bar__text">Рейтинг:</div>
+                                <div className="rating-bar">
+                                        <div className="rating-bar__text">Рейтинг:</div>
                                         <div className="rating-bar__rate">{`${rating.toFixed(0)}/10`}</div>
-                                        </div>
-                                        </Card.Content>
-                                <Card.Content extra>
+                                </div>
+                        </Card.Content>
+                        <Card.Content extra>
                                 <div className="product-card__price">
-                                                        {`Ціна: ${product.price} грн.`}
-                                                </div>
-                                </Card.Content>
+                                        {`Ціна: ${product.price} грн.`}
+                                </div>
 
-                        <Button color="black">
+                        </Card.Content>
 
-                                        В КОРЗИНУ
-
+                        <Button color="twitter">
+                                Деталі
                         </Button>
-                </Card >
-
-
-
+                </Link>
         )
 }
 
