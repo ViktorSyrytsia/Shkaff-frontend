@@ -65,13 +65,13 @@ const CheckoutForm = () => {
             }
         }
 
-        //setError(false)
+        setError(false)
     }
 
     return (
         <Form>
             <Form.Input
-                error={error || customerToSend.surname  && { content: 'Будь ласка, введіть прізвище', pointing: 'below' }}
+                error={error && !customerToSend.surname  && { content: 'Будь ласка, введіть прізвище', pointing: 'below' }}
                 fluid
                 label='Прізвище'
                 placeholder='Введіть прізвище...'
@@ -80,7 +80,7 @@ const CheckoutForm = () => {
                 id='customer'
             />
             <Form.Input
-                error={error && !!customerToSend.name && { content: 'Будь ласка, введіть ім‘я', pointing: 'below' }}
+                error={error && !customerToSend.name && { content: 'Будь ласка, введіть ім‘я', pointing: 'below' }}
                 fluid
                 label='Ім‘я'
                 placeholder='Введіть ім‘я...'
