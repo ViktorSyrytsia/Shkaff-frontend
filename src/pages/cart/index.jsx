@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {Message} from "semantic-ui-react";
 
 import CartItem from "./cart-item";
+import CheckoutForm from "./checkout-form";
 import './style.scss'
 
 const Cart = () => {
@@ -35,9 +36,7 @@ const Cart = () => {
             </div>
             <div className='cart__checkout'>
                 <h2 className='cart__checkout__title'>Оформити замовлення</h2>
-                <div className='cart__checkout__form'>
-                    form
-                </div>
+                <CheckoutForm />
             </div>
         </div>
     )
