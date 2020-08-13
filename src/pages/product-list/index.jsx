@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
-import { Card, Menu } from 'semantic-ui-react';
+import {Card, Dropdown, Menu} from 'semantic-ui-react';
 import { DropDown } from '../../components';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage';
 import { productFilterObject, productSortObject } from '../../constants';
@@ -58,8 +58,7 @@ const ProductList = ({ location: { query }, match: { params } }) => {
         }
 
         const handleDropDown = (e, options) => {
-                const id = e.target.parentElement.offsetParent.id;
-                console.log('options.value:', options.value);
+                const id = e.target.closest('.dropdown').id;
                 id === 'Розміри' ? setProductFilter(options.value) : setProductSort(options.value);
         }
 

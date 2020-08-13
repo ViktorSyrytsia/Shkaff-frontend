@@ -1,7 +1,7 @@
 const productFilterObject = {
         filterOptions: [
                 { key: 'all', text: 'Усі', value: 'all' },
-                { key: 'x', text: 'x', value: 'x' },
+                { key: 'oneSize', text: 'Без розміру', value: 'oneSize' },
                 { key: 'xs', text: 'XS', value: 'xs' },
                 { key: 's', text: 'S', value: 's' },
                 { key: 'm', text: 'M', value: 'm' },
