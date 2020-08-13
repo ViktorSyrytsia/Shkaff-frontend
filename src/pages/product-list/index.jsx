@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
-import {Card, Dropdown, Menu} from 'semantic-ui-react';
+import { Card, Menu } from 'semantic-ui-react';
 import { DropDown } from '../../components';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage';
 import { productFilterObject, productSortObject } from '../../constants';
@@ -42,10 +42,10 @@ const ProductList = ({ location: { query }, match: { params } }) => {
         }, [query, subcategories])
 
 
-        useEffect(() => {
-                const catObj = categories && categories.find(cat => cat.name === router[0].toUpperCase() + router.slice(1))
-                setCategoryID(catObj ? catObj.id : null);
-        }, [categories, router])
+        // useEffect(() => {
+        //         const catObj = categories && categories.find(cat => cat.name === router[0].toUpperCase() + router.slice(1))
+        //         setCategoryID(catObj ? catObj.id : null);
+        // }, [categories, router])
 
         useEffect(() => {
                 setSubategoryID(getFromLocalStorage('currentSubcategory'));
