@@ -1,17 +1,18 @@
-import {takeEvery, call, put} from 'redux-saga/effects';
+import { takeEvery, call, put } from 'redux-saga/effects';
 
 import {
     setProducts,
     setLoading,
     setProduct
 } from './products.actions';
-import {getProducts, getProductById} from '../../services/products';
-import {GET_PRODUCTS, GET_PRODUCT_BY_ID} from './products.types';
+import { getProducts, getProductById } from '../../services/products';
+import { GET_PRODUCTS, GET_PRODUCT_BY_ID } from './products.types';
 
 function* handleProductsLoad() {
     try {
         yield put(setLoading(true));
         const products = yield call(getProducts);
+        console.log(products);
         yield put(setProducts(products.data.getProducts));
         yield put(setLoading(false));
     } catch (error) {
@@ -19,7 +20,7 @@ function* handleProductsLoad() {
     }
 }
 
-function* handleGetProductById({id}) {
+function* handleGetProductById({ id }) {
     try {
         yield put(setLoading(true));
         const product = yield call(getProductById, id);
