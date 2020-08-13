@@ -1,4 +1,4 @@
-.header {
+.main-header {
   $self: &;
   display: flex;
   height: 60px;
@@ -82,10 +82,21 @@
         //background: #ffffff75 !important;
       }
     }
-    > a i {
-      color: white;
-      font-size: 1.3rem !important;
-      margin: 0 20px !important;
+    > a {
+      position: relative;
+
+      i {
+        font-size: 1.6rem !important;
+        margin: 0 20px 0 0 !important;
+      }
+      .cart-label {
+        background: #0088cc !important;
+        color: white;
+        position: absolute;
+        right: 5px;
+        bottom: 12px;
+      }
     }
+
   }
 }

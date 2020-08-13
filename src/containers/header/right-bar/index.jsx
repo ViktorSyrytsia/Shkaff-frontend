@@ -1,19 +1,22 @@
 import React from "react";
-import { Icon } from 'semantic-ui-react'
-import { Link } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {Icon, Label} from 'semantic-ui-react'
+import {Link} from "react-router-dom";
 
-import { SearchBar } from '../../index'
+import {SearchBar, Wishlist} from '../../index'
 
 const RightBar = () => {
+    const cartItems = useSelector(({Cart}) => Cart.list)
 
     return (
-        <div className='header__right-bar'>
-            <SearchBar />
-            <Link to='/wishlist'>
-                <Icon name='heart' />
-            </Link>
+        <div className='main-header__right-bar'>
+            <SearchBar/>
+            <Wishlist/>
             <Link to='/cart'>
-                <Icon name='cart' />
+                <Icon name='cart'/>
+                {!!cartItems.length && <Label circular className='cart-label'>
+                    {cartItems.reduce( (sum, item) => sum + item.quantity, 0)}
+                </Label>}
             </Link>
         </div>
     )
