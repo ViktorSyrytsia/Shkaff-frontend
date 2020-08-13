@@ -71,22 +71,20 @@ const CheckoutForm = () => {
     return (
         <Form>
             <Form.Input
-                error={!!customerToSend.surname && error && { content: 'Будь ласка, введіть прізвище', pointing: 'below' }}
+                error={error || customerToSend.surname  && { content: 'Будь ласка, введіть прізвище', pointing: 'below' }}
                 fluid
                 label='Прізвище'
                 placeholder='Введіть прізвище...'
                 name='surname'
-                required
                 onChange={handleChange}
                 id='customer'
             />
             <Form.Input
                 error={error && !!customerToSend.name && { content: 'Будь ласка, введіть ім‘я', pointing: 'below' }}
                 fluid
-                label='Введіть імя...'
-                placeholder='Введіть імя...'
+                label='Ім‘я'
+                placeholder='Введіть ім‘я...'
                 name='name'
-                required
                 onChange={handleChange}
                 id='customer'
             />
@@ -96,7 +94,6 @@ const CheckoutForm = () => {
                 label='Ел. пошта'
                 placeholder='Введіть ел. пошту...'
                 name='email'
-                required
                 onChange={handleChange}
                 id='customer'
             />
@@ -106,7 +103,6 @@ const CheckoutForm = () => {
                 label='Телефон'
                 placeholder='Введіть номер телефон...'
                 name='phone'
-                required
                 onChange={handleChange}
                 id='customer'
                 type='number'
@@ -123,10 +119,10 @@ const CheckoutForm = () => {
             <Form.Field required error={!customerToSend.email || !!error}>
                 <label>Ел. пошта</label>
                 <Input name='email' data-id='customer' type='email' placeholder='Введіть ел.пошту...' onChange={handleChange}/>
-            </Form.Field>
+            </Form.Field>*/}
             <Form.Field required>
                 Спосіб зв‘язку: <b>{checkboxValue}</b>
-            </Form.Field>*/}
+            </Form.Field>
             <Form.Field>
                 <Checkbox
                     radio
