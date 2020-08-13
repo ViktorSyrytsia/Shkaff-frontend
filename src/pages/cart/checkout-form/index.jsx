@@ -10,23 +10,23 @@ const DELIVERY_OPTIONS = [
 ]
 
 const CUSTOMER_DEFAULT = {
-    name: '',
-    surname: '',
-    email: '',
-    phone: '',
+    name: {value: '', isValid: false},
+    surname: {value: '', isValid: false},
+    email: {value: '', isValid: false},
+    phone: {value: '', isValid: false},
 }
 
 const DELIVERY_DEFAULT = {
-    method: '',
-    city: '',
-    postOffice: ''
+    method: {value: '', isValid: false},
+    city: {value: '', isValid: false},
+    postOffice: {value: '', isValid: false}
 }
 
 const ADDRESS_DEFAULT = {
-    city: '',
-    street: '',
-    built: '',
-    apartment: '',
+    city: {value: '', isValid: false},
+    street: {value: '', isValid: false},
+    built: {value: '', isValid: false},
+    apartment: {value: '', isValid: false},
 }
 
 const CheckoutForm = () => {
@@ -36,42 +36,53 @@ const CheckoutForm = () => {
     const [deliveryMethod, setDeliveryMethod] = useState(null)
 
     //CHECKOUT
-    const [customerToSend, setCustomerToSend] = useState(CUSTOMER_DEFAULT)
-    const [deliveryToSend, setDeliveryToSend] = useState(DELIVERY_DEFAULT)
-    const [addressToSend, setAddressToSend] = useState(ADDRESS_DEFAULT)
+    const [customer, setCustomer] = useState(CUSTOMER_DEFAULT)
+    const [delivery, setDelivery] = useState(DELIVERY_DEFAULT)
+    const [address, setAddress] = useState(ADDRESS_DEFAULT)
 
     const handleConnectionChange = ({target}) => setCheckboxValue(target.innerText)
     const handleDeliveryChange = (e, {value}) => {
-        console.log(value)
         setDeliveryMethod(value)
     }
 
-    const handleOnSubmit = (e) => {
-        const isValidateCustomer = Object.values(customerToSend).every( val => val)
+    const validate = (key, value) => {
+        switch (key) {
+            case 'name': {
+               return /^[A-Za-z]{2,50}$/.test(value)
+            }
+            case 'surname': {
+                return /^[A-Za-z]{2,50}$/.test(value)
+            }
+            case 'email': {
+                return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+            }
+            case 'phone': {
+                return /^\+?\d{10,12}$/.test(value)
+            }
+        }
+    }
 
-        console.log(customerToSend)
+    const handleOnSubmit = (e) => {
+        const isValidateCustomer = Object.values(customer).every( val => val.isValid)
 
         if (!isValidateCustomer) {
-            console.log('setEror')
+
             setError(true)
         }
     }
 
-    const handleChange = ({target}) => {
-        console.dir(target)
-        switch (target.id) {
+    const handleChange = ({target: {id, name, value}}) => {
+        switch (id) {
             case 'customer': {
-                setCustomerToSend({...customerToSend, [target.name]: target.value})
+                setCustomer({...customer, [name]: {value: value, isValid: validate(name, value)}})
             }
         }
-
-        setError(false)
     }
 
     return (
         <Form>
             <Form.Input
-                error={error && !customerToSend.surname  && { content: 'Будь ласка, введіть прізвище', pointing: 'below' }}
+                error={error && !customer.surname.isValid ? { content: 'Будь ласка, введіть прізвище', pointing: 'below' } : null}
                 fluid
                 label='Прізвище'
                 placeholder='Введіть прізвище...'
@@ -80,7 +91,7 @@ const CheckoutForm = () => {
                 id='customer'
             />
             <Form.Input
-                error={error && !customerToSend.name && { content: 'Будь ласка, введіть ім‘я', pointing: 'below' }}
+                error={error && !customer.name.isValid ? { content: 'Будь ласка, введіть ім‘я', pointing: 'below' } : null}
                 fluid
                 label='Ім‘я'
                 placeholder='Введіть ім‘я...'
@@ -89,7 +100,7 @@ const CheckoutForm = () => {
                 id='customer'
             />
             <Form.Input
-                error={error && { content: 'Будь ласка, введіть ел. пошту', pointing: 'below' }}
+                error={error && !customer.email.isValid ? { content: 'Будь ласка, введіть ел. пошту', pointing: 'below' } : null}
                 fluid
                 label='Ел. пошта'
                 placeholder='Введіть ел. пошту...'
@@ -98,28 +109,14 @@ const CheckoutForm = () => {
                 id='customer'
             />
             <Form.Input
-                error={error && { content: 'Будь ласка, введіть номер телефону', pointing: 'below' }}
+                error={error && !customer.phone.isValid ? { content: 'Будь ласка, введіть номер телефону', pointing: 'below' }: null}
                 fluid
                 label='Телефон'
                 placeholder='Введіть номер телефон...'
                 name='phone'
                 onChange={handleChange}
                 id='customer'
-                type='number'
             />
-{/*
-            <Form.Field required error={error && !!customerToSend.name}>
-                <label>Введіть імя...</label>
-                <input name='name' id='customer' placeholder='Введіть імя...' onChange={handleChange}/>
-            </Form.Field>
-            <Form.Field required error={!customerToSend.phone || !!error}>
-                <label>Телефон</label>
-                <Input  name='phone' data-id='customer' className='phone' type='number' placeholder='Введіть телоефон...' onChange={handleChange}/>
-            </Form.Field>
-            <Form.Field required error={!customerToSend.email || !!error}>
-                <label>Ел. пошта</label>
-                <Input name='email' data-id='customer' type='email' placeholder='Введіть ел.пошту...' onChange={handleChange}/>
-            </Form.Field>*/}
             <Form.Field required>
                 Спосіб зв‘язку: <b>{checkboxValue}</b>
             </Form.Field>
