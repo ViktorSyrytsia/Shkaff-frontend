@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Image, Rating, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom'
+
+import { linkGenerator } from "../../../utils";
 
 import './style.scss';
 
@@ -15,26 +18,35 @@ const ProductCard = ({ product }) => {
         }, [product])
 
         return (
+
                 <Card>
-                        <Image src={product.images[0].link} wrapped ui={false} />
-                        <Card.Content>
-                                <Card.Content>
-                                        <div className="product-card__name">
-                                                {product.name}
-                                        </div>
-                                        <div className="product-card__price">
-                                                {`Ціна: ${product.price} грн.`}
-                                        </div>
+                                <Image src={product.images[0].link} wrapped ui={false} />
+                                        <Card.Content>
+                                               <div className="product-card__name">
+                                                <Link to={{ pathname: linkGenerator(product), query: product }}>
+                                                        {product.name}
+                                                        </Link>
+                                            </div>
+                                              
+                                           <div className="rating-bar">
+                                           <div className="rating-bar__text">Рейтинг:</div>
+                                        <div className="rating-bar__rate">{`${rating.toFixed(0)}/10`}</div>      
+                                        </div>  
+                                        </Card.Content>    
+                                <Card.Content extra>
+                                <div className="product-card__price">
+                                                        {`Ціна: ${product.price} грн.`}
+                                                </div>
                                 </Card.Content>
-                        </Card.Content>
-                        <Card.Content extra>
-                                <div className="rating-bar">
-                                        <div className="rating-bar__text">Рейтинг:</div>
-                                        <div className="rating-bar__rate">{`${rating.toFixed(1)}/10`}</div>
-                                </div>
-                        </Card.Content>
-                        <Button color="black">Деталі</Button>
-                </Card>
+                       
+                        <Button color="black">
+                               
+                                        В КОРЗИНУ
+             
+                        </Button>
+                </Card >
+
+
 
         )
 }
