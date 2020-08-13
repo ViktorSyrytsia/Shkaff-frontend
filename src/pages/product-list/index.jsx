@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
 import { Card, Menu } from 'semantic-ui-react';
@@ -9,8 +9,6 @@ import { productFilterObject, productSortObject } from '../../constants';
 
 
 import './style.scss';
-
-console.log(productFilterObject);
 
 const ProductList = ({ location: { query }, match: { params } }) => {
 
@@ -25,6 +23,12 @@ const ProductList = ({ location: { query }, match: { params } }) => {
         const [subcategoryID, setSubategoryID] = useState(null);
         const [productFilter, setProductFilter] = useState('all');
         const [productSort, setProductSort] = useState('new');
+
+
+        useEffect(() => {
+                console.log('state:', productFilter);
+                console.log('====================');
+        }, [productFilter])
 
         useEffect(() => {
                 if (query && query.__typename === "Category") {
@@ -53,8 +57,10 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                 setSubategoryID(id);
         }
 
-        const handleDropDown = (e, options, name) => {
-                name === 'Розміри' ? setProductFilter(options.value) : setProductSort(options.value);
+        const handleDropDown = (e, options) => {
+                const id = e.target.parentElement.offsetParent.id;
+                console.log('options.value:', options.value);
+                id === 'Розміри' ? setProductFilter(options.value) : setProductSort(options.value);
         }
 
         return (
@@ -73,16 +79,19 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                                 <Menu>
                                         <Menu.Menu position='left'>
                                                 <DropDown
-                                                        name={productFilterObject.filterName}
+                                                        id={productFilterObject.filterName}
+                                                        name={productFilter}
                                                         options={productFilterObject.filterOptions}
                                                         handleDropDown={handleDropDown}
                                                 />
                                         </Menu.Menu>
                                         <Menu.Menu position='right'>
                                                 <DropDown
-                                                        name={productSortObject.sortName}
+                                                        id={productSortObject.sortName}
+                                                        name={productSort}
                                                         options={productSortObject.sortOptions}
-                                                        handleDropDown={handleDropDown} />
+                                                        handleDropDown={handleDropDown}
+                                                />
                                         </Menu.Menu>
                                 </Menu>
                         </div>

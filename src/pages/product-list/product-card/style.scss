@@ -1,11 +1,8 @@
 .product-card {
   &__name {
+    color: black !important;
     font-weight: bolder;
     font-size: 20px;
-  }
-
-  &__name > a {
-    color: rgb(32, 32, 32) !important;
   }
 
   &__price {

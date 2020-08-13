@@ -1,15 +1,16 @@
 import React from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react'
 
-const DropDown = ({ name, options, handleDropDown }) => {
+const DropDown = ({ id, options, handleDropDown, name }) => {
+        // console.log(name);
         return (
                 <Dropdown
-                        item
-                        simple
-                        text={name}
-                        direction='right'
+                        id={id}
+                        onChange={handleDropDown}
                         options={options}
-                        onChange={(e, options) => handleDropDown(e, options, name)}
+                        placeholder={id}
+                        selection
+                        value={name}
                 />
         )
 }
