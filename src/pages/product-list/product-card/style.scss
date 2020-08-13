@@ -1,27 +1,30 @@
 .product-card {
-        &__name {
-                font-weight: bolder;
-                font-size: 18px;
-        }
+  &__name {
+    font-weight: bolder;
+    font-size: 20px;
+  }
 
-        &__price {
-                margin-top: 10px;
-                font-size: 14px;
-                color: rgb(122, 122, 122);
-        }
+  &__name > a {
+    color: rgb(32, 32, 32) !important;
+  }
+
+  &__price {
+    font-size: 18px;
+    color: rgb(122, 122, 122);
+  }
 }
 
 .rating-bar {
-        display: flex;
+  margin-top: 10px;
+  display: flex;
 
-        &__text {
-                margin-right: 10px;
-        }
+  &__text {
+    margin-right: 10px;
+    color: rgb(122, 122, 122);
+  }
 
-        &__rate {
-                font-size: 18px;
-                font-weight: bold;
-                color: rgb(58, 58, 58);
-        }
+  &__rate {
+    font-size: 18px;
+    color: rgb(58, 58, 58);
+  }
 }
-

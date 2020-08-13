@@ -91,6 +91,7 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                         <div className="product-cards__container">
                                 <div className="product-cards__list">
                                         <Card.Group itemsPerRow={4}>
+
                                                 {products && products
                                                         .filter(prod => prod.category.id === categoryID)
                                                         .filter(prod => subcategoryID ? prod.subcategory.id === subcategoryID : prod)
