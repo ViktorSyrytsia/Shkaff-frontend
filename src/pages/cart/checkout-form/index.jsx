@@ -49,6 +49,7 @@ const CheckoutForm = () => {
     const handleOnSubmit = (e) => {
         const isValidateCustomer = Object.values(customerToSend).every( val => val)
 
+        console.log(customerToSend)
 
         if (!isValidateCustomer) {
             console.log('setEror')
@@ -57,29 +58,63 @@ const CheckoutForm = () => {
     }
 
     const handleChange = ({target}) => {
-        switch (target.dataset.id) {
+        console.dir(target)
+        switch (target.id) {
             case 'customer': {
                 setCustomerToSend({...customerToSend, [target.name]: target.value})
             }
         }
 
-        setError(false)
+        //setError(false)
     }
-
-    useEffect(() => {
-        console.log(customerToSend)
-    }, [customerToSend])
-
 
     return (
         <Form>
-            <Form.Field required error={error && !customerToSend.surname}>
-                <label>Прізвище</label>
-                <Input  name='surname' data-id='customer' placeholder='Введіть прізвище...' onChange={handleChange}/>
-            </Form.Field>
+            <Form.Input
+                error={!!customerToSend.surname && error && { content: 'Будь ласка, введіть прізвище', pointing: 'below' }}
+                fluid
+                label='Прізвище'
+                placeholder='Введіть прізвище...'
+                name='surname'
+                required
+                onChange={handleChange}
+                id='customer'
+            />
+            <Form.Input
+                error={error && !!customerToSend.name && { content: 'Будь ласка, введіть ім‘я', pointing: 'below' }}
+                fluid
+                label='Введіть імя...'
+                placeholder='Введіть імя...'
+                name='name'
+                required
+                onChange={handleChange}
+                id='customer'
+            />
+            <Form.Input
+                error={error && { content: 'Будь ласка, введіть ел. пошту', pointing: 'below' }}
+                fluid
+                label='Ел. пошта'
+                placeholder='Введіть ел. пошту...'
+                name='email'
+                required
+                onChange={handleChange}
+                id='customer'
+            />
+            <Form.Input
+                error={error && { content: 'Будь ласка, введіть номер телефону', pointing: 'below' }}
+                fluid
+                label='Телефон'
+                placeholder='Введіть номер телефон...'
+                name='phone'
+                required
+                onChange={handleChange}
+                id='customer'
+                type='number'
+            />
+{/*
             <Form.Field required error={error && !!customerToSend.name}>
-                <label>Ім‘я</label>
-                <Input name='name' data-id='customer' placeholder='Введіть імя...' onChange={handleChange}/>
+                <label>Введіть імя...</label>
+                <input name='name' id='customer' placeholder='Введіть імя...' onChange={handleChange}/>
             </Form.Field>
             <Form.Field required error={!customerToSend.phone || !!error}>
                 <label>Телефон</label>
@@ -91,7 +126,7 @@ const CheckoutForm = () => {
             </Form.Field>
             <Form.Field required>
                 Спосіб зв‘язку: <b>{checkboxValue}</b>
-            </Form.Field>
+            </Form.Field>*/}
             <Form.Field>
                 <Checkbox
                     radio
