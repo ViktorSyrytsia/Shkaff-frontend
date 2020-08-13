@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
                                               
                                            <div className="rating-bar">
                                            <div className="rating-bar__text">Рейтинг:</div>
-                                        <div className="rating-bar__rate">{`${rating.toFixed(1)}/10`}</div>      
+                                        <div className="rating-bar__rate">{`${rating.toFixed(0)}/10`}</div>      
                                         </div>  
                                         </Card.Content>    
                                 <Card.Content extra>
