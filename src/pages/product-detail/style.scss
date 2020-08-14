@@ -65,7 +65,7 @@
         }
 
         &__error {
-          color: #e30000;
+          color: crimson;
           font-size: .8em;
           position: absolute;
           bottom: -20px;
@@ -89,7 +89,7 @@
         }
 
         i.selected {
-          color: #e30000;
+          color: crimson;
         }
       }
     }

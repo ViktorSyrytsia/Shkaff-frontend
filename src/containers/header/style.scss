@@ -112,12 +112,18 @@
       position: relative;
 
       .cart-label {
-        background: #0088cc !important;
+        background: #ffb231 !important;
         color: white;
         position: absolute;
         right: 5px;
         bottom: 12px;
       }
+    }
+
+    .ui.circular.label {
+      min-width: 1.7em;
+      padding: .5em!important;
+      font-size: .7em;
     }
 
   }
