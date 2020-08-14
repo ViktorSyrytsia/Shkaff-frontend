@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
-import {Card, Menu} from 'semantic-ui-react';
+import { Card, Menu } from 'semantic-ui-react';
 import { DropDown } from '../../components';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage';
 import { productFilterObject, productSortObject } from '../../constants';
