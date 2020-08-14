@@ -1,11 +1,15 @@
-import {takeEvery, call} from 'redux-saga/effects';
+import {takeEvery, call, put} from 'redux-saga/effects';
 
 import {addOrder} from '../../services/orders';
 import {ADD_ORDER} from './order.types';
+import {setToLocalStorage} from "../../services/local-storage";
+import {setCart} from "../cart/cart.actions";
 
 function* handleAddOrder({payload}) {
     try {
         yield call(addOrder, payload);
+        yield put(setCart([]));
+        setToLocalStorage('cart', [])
     } catch (e) {
         console.log(e)
     }
