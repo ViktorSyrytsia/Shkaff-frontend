@@ -2,27 +2,16 @@
   $self: &;
   display: flex;
   height: 60px;
-<<<<<<< HEAD
-  background: white;
-=======
->>>>>>> c8a7478d97d573ab2272b77d04e97d60305fac87
   align-items: center;
   padding: 0 20px;
   background: #ffffff;
-  box-shadow: 13px 13px 26px #e3e3e3,
-  -13px -13px 26px #ffffff;
+  box-shadow: 13px 13px 26px #e3e3e3, -13px -13px 26px #ffffff;
   border-bottom: 1px solid rgb(247, 247, 247);
 
   &__logo {
     font-size: 3rem;
-<<<<<<< HEAD
-    color: black;
-    opacity: 0.8;
-    font-family: "Great Vibes", cursive;
-=======
     color: #000000;
-    font-family: 'Great Vibes', cursive;
->>>>>>> c8a7478d97d573ab2272b77d04e97d60305fac87
+    font-family: "Great Vibes", cursive;
     font-weight: 400;
     font-style: normal;
     margin: 0;
@@ -52,8 +41,7 @@
       &:hover {
         border-radius: 0px;
         background: #ffffff;
-        box-shadow: 11px 11px 22px #e3e3e3,
-        -11px -11px 22px #ffffff;
+        box-shadow: 11px 11px 22px #e3e3e3, -11px -11px 22px #ffffff;
 
         #{$self}__subcategories-list {
           display: block;
@@ -110,7 +98,7 @@
       margin: 0 20px !important;
       cursor: pointer;
       color: rgb(179, 179, 179);
-      transition: all .1s ease;
+      transition: all 0.1s ease;
 
       &:hover {
         color: darken(rgb(179, 179, 179), 30%);
@@ -129,15 +117,11 @@
         bottom: 12px;
       }
     }
-<<<<<<< HEAD
-=======
 
     .ui.circular.label {
       min-width: 1.7em;
-      padding: .5em!important;
-      font-size: .7em;
+      padding: 0.5em !important;
+      font-size: 0.7em;
     }
-
->>>>>>> c8a7478d97d573ab2272b77d04e97d60305fac87
   }
 }
