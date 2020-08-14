@@ -1,4 +1,14 @@
 .product-card {
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 5px 5px 14px #d9d9d9, -5px -5px 14px #ffffff;
+  border: 1px solid rgb(250, 250, 250);
+  transition: all 0.2s;
+
+  &:hover {
+    border: 1px solid rgb(250, 250, 250);
+    box-shadow: 28px 28px 30px #d9d9d9, -5px -5px 30px #ffffff !important;
+  }
   &__name {
     color: black !important;
     font-weight: bolder;
