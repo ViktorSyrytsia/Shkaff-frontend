@@ -1,32 +1,36 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 import './style.scss';
-
+import SubcategoryBadge from '../../../components/subcategory-badge';
 const SubcategoryFilter = ({ subcategories, selected, onSelectSubcategory }) => {
+
         return (
                 <div className="subcategory-filter__container">
-                        <Button
-                                size="huge"
-                                basic
-                                onClick={() => onSelectSubcategory(null)}
-                                color='black'>Усі</Button>
+                        <SubcategoryBadge
+                                onSelectSubcategory={onSelectSubcategory}
+                                id={null}
+                                name={'Усі'}
+                                badgeClassName="subcategory-badge" />
                         {subcategories && subcategories.map((sc) => {
                                 if (sc.id === selected) {
                                         return (
-                                                <Button
-
-                                                        size="huge"
-                                                        onClick={() => onSelectSubcategory(sc.id)}
+                                                <SubcategoryBadge
                                                         key={sc.id}
-                                                        color='black'>{sc.name}</Button>
+                                                        id={sc.id}
+                                                        onSelectSubcategory={onSelectSubcategory}
+                                                        name={sc.name}
+                                                        badgeClassName="subcategory-badge-active"
+                                                />
                                         )
                                 } else {
                                         return (
-                                                <Button
-                                                        size="huge"
-                                                        onClick={() => onSelectSubcategory(sc.id)}
+                                                <SubcategoryBadge
                                                         key={sc.id}
-                                                        color='grey'>{sc.name}</Button>
+                                                        id={sc.id}
+                                                        onSelectSubcategory={onSelectSubcategory}
+                                                        name={sc.name}
+                                                        badgeClassName="subcategory-badge"
+                                                />
                                         )
                                 }
                         })}

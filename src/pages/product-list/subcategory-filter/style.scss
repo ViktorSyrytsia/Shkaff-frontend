@@ -1,16 +1,6 @@
 .subcategory-filter {
-        &__container {
-                margin-top: 20px;
-              
-        }
-
-        &__item {
-                cursor: pointer;
-                font-weight: bold;
-                font-size: 18px;
-                border: 2px solid black;
-                height: 50px;
-                text-align: center;
-                line-height: 45px;
-        }
+  &__container {
+    margin-top: 20px;
+    display: flex;
+  }
 }
