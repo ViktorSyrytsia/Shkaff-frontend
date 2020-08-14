@@ -69,7 +69,7 @@ function* handleSetCartItemQuantity({
   yield put(setCart(newCart));
 }
 
-export default function* categoriesSaga() {
+export default function* cartSaga() {
   yield takeEvery(GET_CART, handleCartLoad);
   yield takeEvery(ADD_ITEM_TO_CART, handleAddCartItem);
   yield takeEvery(REMOVE_ITEM_FROM_CART, handleRemoveCartItem);

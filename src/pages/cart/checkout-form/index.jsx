@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import {Checkbox, Form, Dropdown} from 'semantic-ui-react'
-import {useSelector} from "react-redux";
-
+import {useSelector, useDispatch} from "react-redux";
 
 import {
     CUSTOMER_INPUTS_DATA,
@@ -15,11 +14,13 @@ import {
 } from "../../../constants/checkout-form.options";
 import {checkoutFieldValidate, orderIdGenerator} from '../../../utils'
 import { ModalCheckout} from "../../../components";
+import {addOrder} from "../../../redux/order/order.actions";
 import './style.scss'
 
 
 const CheckoutForm = () => {
     const cartItems = useSelector(({Cart}) => Cart.list)
+    const dispatch = useDispatch()
 
     const [error, setError] = useState(false)
     const [modalVisibility, setModalVisibility] = useState(false)
@@ -40,19 +41,13 @@ const CheckoutForm = () => {
     }
 
     const onModalAction = (key) => {
-        key && console.log('Vushka')
+        key && dispatch(addOrder(order))
     }
 
-    const handleOnSubmit = (e) => {
+    const handleOnSubmit = () => {
         const isValidateCustomer = Object.values(customer).every(val => val.isValid)
         const isValidateDelivery = deliveryMethod === 2 ? Object.values(delivery).every(val => val.isValid) : true
         const isValidateAddress = deliveryMethod === 3 ? Object.values(address).every(val => val.isValid) : true
-
-        // console.log('Customer', isValidateCustomer)
-        // console.log('Delivery', isValidateCustomer)
-        // console.log('Address', isValidateCustomer)
-        // console.log('deliveryMethod', deliveryMethod)
-        // console.log('connectionMethod', connectionMethod)
 
         if (!isValidateCustomer ||
             !isValidateDelivery ||
@@ -72,10 +67,9 @@ const CheckoutForm = () => {
             },
             delivery: {
                 method: delivery.method.value,
-                city: delivery.city.value,
+                city: delivery.city.value || address.city.value,
                 postOffice: delivery.postOffice.value,
                 address: {
-                    city: address.city.value,
                     street: address.street.value,
                     built: address.built.value,
                     apartment: address.apartment.value,
@@ -96,7 +90,6 @@ const CheckoutForm = () => {
             connectionMethod
         }
 
-        console.log('wtf')
         setOrder(orderToSend)
         setError(false)
         setModalVisibility(true)
@@ -244,13 +237,6 @@ const CheckoutForm = () => {
                 modalVisibility={modalVisibility}
                 setModalVisibility={setModalVisibility}
                 />
-           {/* <button
-                className='basic-button'
-                type='submit'
-                onClick={handleOnSubmit}
-            >Готово
-            </button>*/}
-
         </Form>
     )
 }

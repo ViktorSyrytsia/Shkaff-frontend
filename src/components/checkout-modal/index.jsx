@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {Button, Form, Header, Icon, Modal} from 'semantic-ui-react'
+import React from 'react'
+import {Button, Modal} from 'semantic-ui-react'
 
 const ModalCheckout = ({order, setAction, onSubmit, modalVisibility, setModalVisibility}) => {
 
@@ -19,9 +19,7 @@ const ModalCheckout = ({order, setAction, onSubmit, modalVisibility, setModalVis
             trigger={<button
                 className='basic-button'
                 type='submit'
-               /* onClick={onSubmit}*/
-            >Готово
-            </button>}
+            >Готово</button>}
             className='remove-modal'
         >
             {order &&
@@ -39,7 +37,7 @@ const ModalCheckout = ({order, setAction, onSubmit, modalVisibility, setModalVis
                         <p>Адреса:
                             {
                                 order.delivery.method === 'кур‘єром' &&
-                                <span> {order.delivery.address.city},
+                                <span> {order.delivery.city},
                                         вул. {order.delivery.address.street},
                                         буд. {order.delivery.address.built}
                                     {order.delivery.address.apartment &&
