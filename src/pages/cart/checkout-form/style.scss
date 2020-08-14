@@ -8,3 +8,14 @@
     -moz-appearance: textfield !important;
   }
 }
+
+.checkout-error {
+  color: crimson;
+  font-size: .8em;
+}
+
+.checkbox {
+  > span {
+    margin-left: 5px;
+  }
+}

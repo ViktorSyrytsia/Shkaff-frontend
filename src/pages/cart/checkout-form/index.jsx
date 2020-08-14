@@ -1,165 +1,161 @@
 import React, {useEffect, useState} from "react";
-import {Button, Checkbox, Form, Dropdown, Input} from 'semantic-ui-react'
+import {Checkbox, Form, Dropdown, Input} from 'semantic-ui-react'
 
+import {
+    CUSTOMER_INPUTS_DATA,
+    CONNECTION_CHECKBOX_DATA,
+    CURRIER_DELIVERY_INPUTS_DATA,
+    POST_DELIVERY_INPUTS_DATA,
+    DELIVERY_OPTIONS,
+    CUSTOMER_DEFAULT,
+    DELIVERY_DEFAULT,
+    ADDRESS_DEFAULT
+} from "../../../constants/checkout-form.options";
+import {checkoutFieldValidate} from '../../../utils'
 import './style.scss'
-
-const DELIVERY_OPTIONS = [
-    {key: 1, text: 'самовивіз', value: 1},
-    {key: 2, text: 'на відділення Нової Пошти', value: 2},
-    {key: 3, text: 'кур‘єром', value: 3},
-]
-
-const CUSTOMER_DEFAULT = {
-    name: {value: '', isValid: false},
-    surname: {value: '', isValid: false},
-    email: {value: '', isValid: false},
-    phone: {value: '', isValid: false},
-}
-
-const DELIVERY_DEFAULT = {
-    method: {value: '', isValid: false},
-    city: {value: '', isValid: false},
-    postOffice: {value: '', isValid: false}
-}
-
-const ADDRESS_DEFAULT = {
-    city: {value: '', isValid: false},
-    street: {value: '', isValid: false},
-    built: {value: '', isValid: false},
-    apartment: {value: '', isValid: false},
-}
+import {useSelector} from "react-redux";
 
 const CheckoutForm = () => {
+    const cartItems = useSelector(({Cart}) => Cart.list)
+
     const [error, setError] = useState(false)
 
-    const [checkboxValue, setCheckboxValue] = useState('')
+    const [connectionMethod, setConnectionMethod] = useState('')
     const [deliveryMethod, setDeliveryMethod] = useState(null)
 
-    //CHECKOUT
     const [customer, setCustomer] = useState(CUSTOMER_DEFAULT)
     const [delivery, setDelivery] = useState(DELIVERY_DEFAULT)
     const [address, setAddress] = useState(ADDRESS_DEFAULT)
 
-    const handleConnectionChange = ({target}) => setCheckboxValue(target.innerText)
+    const handleConnectionChange = ({target}) => setConnectionMethod(target.innerText)
     const handleDeliveryChange = (e, {value}) => {
         setDeliveryMethod(value)
-    }
-
-    const validate = (key, value) => {
-        switch (key) {
-            case 'name': {
-               return /^[A-Za-zА-Яа-я]{2,50}$/.test(value)
-            }
-            case 'surname': {
-                return /^[A-Za-zА-Яа-я]{2,50}$/.test(value)
-            }
-            case 'email': {
-                return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-            }
-            case 'phone': {
-                return /^\+?\d{10,12}$/.test(value)
-            }
-        }
+        setDelivery({...delivery, method: {value: e.target.innerText, isValid: true}})
     }
 
     const handleOnSubmit = (e) => {
-        const isValidateCustomer = Object.values(customer).every( val => val.isValid)
+        const isValidateCustomer = Object.values(customer).every(val => val.isValid)
+        const isValidateDelivery = deliveryMethod === 2 ? Object.values(delivery).every(val => val.isValid) : true
+        const isValidateAddress = deliveryMethod === 3 ? Object.values(address).every(val => val.isValid) : true
 
-        if (!isValidateCustomer) {
+        // console.log('Customer', isValidateCustomer)
+        // console.log('Delivery', isValidateCustomer)
+        // console.log('Address', isValidateCustomer)
+        // console.log('deliveryMethod', deliveryMethod)
+        // console.log('connectionMethod', connectionMethod)
 
+        if (!isValidateCustomer ||
+            !isValidateDelivery ||
+            !isValidateAddress ||
+            !connectionMethod ||
+            !deliveryMethod) {
             setError(true)
+            return
         }
+
+        const orderToSend = {
+            customer: {
+                name: customer.name.value,
+                surname: customer.surname.value,
+                email: customer.email.value,
+                phone: customer.phone.value,
+            },
+            delivery: {
+                method: delivery.method.value,
+                city: delivery.city.value,
+                postOffice: delivery.postOffice.value,
+                address: {
+                    city: address.city.value,
+                    street: address.street.value,
+                    built: address.built.value,
+                    apartment: address.apartment.value,
+                }
+            },
+            products: [
+                ...cartItems
+            ],
+            connectionMethod
+        }
+
+        setError(false)
+        console.log('order', orderToSend)
     }
 
     const handleChange = ({target: {id, name, value}}) => {
         switch (id) {
             case 'customer': {
-                setCustomer({...customer, [name]: {value: value, isValid: validate(name, value)}})
+                setCustomer({
+                    ...customer,
+                    [name]: {
+                        value: value, isValid: checkoutFieldValidate(name, value.trim())
+                    }
+                })
+                return;
+            }
+            case 'post': {
+                setDelivery({
+                    ...delivery,
+                    [name]: {
+                        value: value, isValid: checkoutFieldValidate(name, value.trim())
+                    }
+                })
+                return;
+            }
+            case 'currier': {
+                setAddress({
+                    ...address,
+                    [name]: {
+                        value: value, isValid:
+                            checkoutFieldValidate(name, value.trim())
+                    }
+                })
+                return;
             }
         }
     }
 
     return (
         <Form>
-            <Form.Input
-                error={error && !customer.surname.isValid ? { content: 'Будь ласка, введіть прізвище', pointing: 'below' } : null}
-                fluid
-                label='Прізвище'
-                placeholder='Введіть прізвище...'
-                name='surname'
-                onChange={handleChange}
-                id='customer'
-            />
-            <Form.Input
-                error={error && !customer.name.isValid ? { content: 'Будь ласка, введіть ім‘я', pointing: 'below' } : null}
-                fluid
-                label='Ім‘я'
-                placeholder='Введіть ім‘я...'
-                name='name'
-                onChange={handleChange}
-                id='customer'
-            />
-            <Form.Input
-                error={error && !customer.email.isValid ? { content: 'Будь ласка, введіть ел. пошту', pointing: 'below' } : null}
-                fluid
-                label='Ел. пошта'
-                placeholder='Введіть ел. пошту...'
-                name='email'
-                onChange={handleChange}
-                id='customer'
-            />
-            <Form.Input
-                error={error && !customer.phone.isValid ? { content: 'Будь ласка, введіть номер телефону', pointing: 'below' }: null}
-                fluid
-                label='Телефон'
-                placeholder='Введіть номер телефон...'
-                name='phone'
-                onChange={handleChange}
-                id='customer'
-            />
-            <Form.Field required>
-                Спосіб зв‘язку: <b>{checkboxValue}</b>
+
+            {
+                CUSTOMER_INPUTS_DATA.map((data, i) => (
+                    <Form.Input
+                        key={i}
+                        error={error && !customer[data.name].isValid ? {
+                            content: data.error, pointing: 'below'
+                        } : null}
+                        fluid
+                        label={data.label}
+                        placeholder={data.placeholder}
+                        name={data.name}
+                        onChange={handleChange}
+                        id='customer'
+                    />
+                ))
+            }
+
+
+            <Form.Field required className={'checkbox'}>
+                Спосіб зв‘язку: <b>{connectionMethod}</b>
+                {error && !connectionMethod &&
+                <span className={'checkout-error'}>Виберіть спосіб зв‘язку нижче</span>}
             </Form.Field>
-            <Form.Field>
-                <Checkbox
-                    radio
-                    data-id='connection'
-                    label='Ел. пошта'
-                    name='connectionMethod'
-                    checked={checkboxValue === 'Ел. пошта'}
-                    onChange={handleConnectionChange}
-                />
-            </Form.Field>
-            <Form.Field>
-                <Checkbox
-                    radio
-                    data-id='connection'
-                    label='Телефон'
-                    name='connectionMethod'
-                    checked={checkboxValue === 'Телефон'}
-                    onChange={handleConnectionChange}
-                />
-            </Form.Field>
-            <Form.Field>
-                <Checkbox
-                    radio
-                    data-id='connection'
-                    label='Telegram'
-                    name='connectionMethod'
-                    checked={checkboxValue === 'Telegram'}
-                    onChange={handleConnectionChange}
-                />
-            </Form.Field>
-            <Form.Field>
-                <Checkbox
-                    radio
-                    data-id='connection'
-                    label='Viber'
-                    name='connectionMethod'
-                    checked={checkboxValue === 'Viber'}
-                    onChange={handleConnectionChange}
-                />
-            </Form.Field>
+            {
+                CONNECTION_CHECKBOX_DATA.map((data, i) => (
+                    <Form.Field key={i}>
+                        <Checkbox
+                            radio
+                            data-id='connection'
+                            label={data.label}
+                            name='connectionMethod'
+                            checked={connectionMethod === data.label}
+                            onChange={handleConnectionChange}
+                        />
+                    </Form.Field>
+                ))
+            }
+
+
             <Dropdown
                 data-id='delivery'
                 onChange={handleDeliveryChange}
@@ -168,48 +164,64 @@ const CheckoutForm = () => {
                 selection
                 value={deliveryMethod}
             />
+            {error && !deliveryMethod &&
+            <div className={'checkout-error'}>Виберіть спосіб доставки</div>}
+
             {
                 deliveryMethod === 2 && (
                     <>
-                        <Form.Field required>
-                            <label>Місто</label>
-                            <Input data-id='delivery' placeholder='Введіть місто...'/>
-                        </Form.Field>
-                        <Form.Field required>
-                            <label>Номер відділння</label>
-                            <Input data-id='delivery' placeholder='Введіть номер відділення Нової Пошти'/>
-                        </Form.Field>
+                        {
+                            POST_DELIVERY_INPUTS_DATA.map((data, i) => (
+                                <Form.Input
+                                    key={i}
+                                    error={error && !delivery[data.name].isValid ? {
+                                        content: data.error,
+                                        pointing: 'below'
+                                    } : null}
+                                    fluid
+                                    label={data.label}
+                                    placeholder={data.placeholder}
+                                    name={data.name}
+                                    onChange={handleChange}
+                                    id='post'
+                                />
+                            ))
+                        }
                     </>
                 )
             }
+
             {
                 deliveryMethod === 3 && (
-                    <>
-                        <Form.Field required>
-                            <label>Місто</label>
-                            <Input data-id='delivery' placeholder='Введіть назву міста...'/>
-                        </Form.Field>
-                        <Form.Field required>
-                            <label>Вулиця</label>
-                            <Input data-id='delivery' placeholder='Введіть назву вулиці...'/>
-                        </Form.Field>
-                        <Form.Field required>
-                            <label>Будинок</label>
-                            <Input data-id='delivery' placeholder='Введіть номер будинок...'/>
-                        </Form.Field>
-                        <Form.Field required>
-                            <label>Квартира</label>
-                            <Input data-id='delivery' placeholder='Введіть номер квартири...'/>
-                        </Form.Field>
+                    <>  {
+                        CURRIER_DELIVERY_INPUTS_DATA.map((data, i) => (
+                            <Form.Input
+                                key={i}
+                                error={error && !address[data.name].isValid ? {
+                                    content: data.error,
+                                    pointing: 'below'
+                                } : null}
+                                fluid
+                                label={data.label}
+                                placeholder={data.placeholder}
+                                name={data.name}
+                                onChange={handleChange}
+                                id='currier'
+                            />
+                        ))
+                    }
                     </>
                 )
             }
+
             <br/>
             <button
-                    className='basic-button'
-                    type='submit'
-                    onClick={handleOnSubmit}
-            >Готово</button>
+                className='basic-button'
+                type='submit'
+                onClick={handleOnSubmit}
+            >Готово
+            </button>
+
         </Form>
     )
 }

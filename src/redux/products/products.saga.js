@@ -12,7 +12,6 @@ function* handleProductsLoad() {
     try {
         yield put(setLoading(true));
         const products = yield call(getProducts);
-        console.log(products);
         yield put(setProducts(products.data.getProducts));
         yield put(setLoading(false));
     } catch (error) {
