@@ -13,7 +13,7 @@ const RightBar = () => {
             <SearchBar/>
             <Wishlist/>
             <Link to='/cart'>
-                <Icon name='cart'/>
+                <Icon name='cart' className='header-icons'/>
                 {!!cartItems.length && <Label circular className='cart-label'>
                     {cartItems.reduce( (sum, item) => sum + item.quantity, 0)}
                 </Label>}
