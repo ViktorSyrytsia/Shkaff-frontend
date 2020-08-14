@@ -1,8 +1,28 @@
 export const CUSTOMER_INPUTS_DATA = [
-    {name: 'surname', error: 'Будь ласка, введіть прізвище (від 2 до 30 літер)' ,label: 'Прізвище', placeholder: 'Введіть прізвище...'},
-    {name: 'name', error: 'Будь ласка, введіть ім‘я (від 2 до 30 літер)' ,label: 'Ім‘я', placeholder: 'Введіть ім‘я...'},
-    {name: 'email', error: 'Будь ласка, введіть валідну ел. пошту' ,label: 'Ел. пошта', placeholder: 'test.mail@email.com'},
-    {name: 'phone', error: 'Будь ласка, введіть валідний номер телефону' ,label: 'Телефон', placeholder: '0987654321'},
+    {
+        name: 'surname',
+        error: 'Будь ласка, введіть прізвище (від 2 до 30 літер)',
+        label: 'Прізвище',
+        placeholder: 'Введіть прізвище...'
+    },
+    {
+        name: 'name',
+        error: 'Будь ласка, введіть ім‘я (від 2 до 30 літер)',
+        label: 'Ім‘я',
+        placeholder: 'Введіть ім‘я...'
+    },
+    {
+        name: 'email',
+        error: 'Будь ласка, введіть валідну ел. пошту',
+        label: 'Ел. пошта',
+        placeholder: 'test.mail@email.com'
+    },
+    {
+        name: 'phone',
+        error: 'Будь ласка, введіть валідний номер телефону',
+        label: 'Телефон',
+        placeholder: '0987654321'
+    },
 ]
 
 export const CONNECTION_CHECKBOX_DATA = [
@@ -13,15 +33,45 @@ export const CONNECTION_CHECKBOX_DATA = [
 ]
 
 export const POST_DELIVERY_INPUTS_DATA = [
-    {name: 'city', error: 'Будь ласка, введіть назуву міста доставки (від 2 до 50 символів)' ,label: 'Місто', placeholder: 'Введіть місто доставки...'},
-    {name: 'postOffice', error: 'Будь ласка, введіть номер відділення Нової Пошти (від 1 до 5 цифр)' ,label: 'Номер відділення', placeholder: 'Введіть номер відділення...'},
+    {
+        name: 'city',
+        error: 'Будь ласка, введіть назуву міста доставки (від 2 до 50 символів)',
+        label: 'Місто',
+        placeholder: 'Введіть місто доставки...'
+    },
+    {
+        name: 'postOffice',
+        error: 'Будь ласка, введіть номер відділення Нової Пошти (від 1 до 5 цифр)',
+        label: 'Номер відділення',
+        placeholder: 'Введіть номер відділення...'
+    },
 ]
 
 export const CURRIER_DELIVERY_INPUTS_DATA = [
-    {name: 'city', error: 'Будь ласка, введіть назуву міста для доставки (від 2 до 50 символів)' ,label: 'Місто', placeholder: 'Введіть місто доставки...'},
-    {name: 'street', error: 'Будь ласка, введіть назву вулиці для доставки (від 2 до 50 літер)' ,label: 'Вулиця', placeholder: 'Введіть назву вулиці...'},
-    {name: 'built', error: 'Будь ласка, введіть номер будинку для доставки (від 1 до 50 символів)' ,label: 'Будинок', placeholder: 'Введіть номер будинку...'},
-    {name: 'apartment', error: 'Будь ласка, введіть назву квартири для доставки (від 2 до 5 символів)' ,label: 'Вулиця', placeholder: 'Введіть номер квартири...'},
+    {
+        name: 'city',
+        error: 'Будь ласка, введіть назуву міста для доставки (від 2 до 50 символів)',
+        label: 'Місто',
+        placeholder: 'Введіть місто доставки...'
+    },
+    {
+        name: 'street',
+        error: 'Будь ласка, введіть назву вулиці для доставки (від 2 до 50 літер)',
+        label: 'Вулиця',
+        placeholder: 'Введіть назву вулиці...'
+    },
+    {
+        name: 'built',
+        error: 'Будь ласка, введіть номер будинку для доставки (від 1 до 50 символів)',
+        label: 'Будинок',
+        placeholder: 'Введіть номер будинку...'
+    },
+    {
+        name: 'apartment',
+        error: 'Будь ласка, введіть назву квартири для доставки (від 2 до 5 символів)',
+        label: 'Вулиця',
+        placeholder: 'Введіть номер квартири...'
+    },
 ]
 
 export const DELIVERY_OPTIONS = [

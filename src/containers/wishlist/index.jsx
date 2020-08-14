@@ -19,7 +19,6 @@ const Wishlist = () => {
         item && dispatch(removeItemFromWishlist(item.id))
     }
 
-
     return (
         <div className='wishlist'>
             <div className='wishlist__header'>

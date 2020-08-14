@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {Checkbox, Form, Dropdown, Input} from 'semantic-ui-react'
+import {Checkbox, Form, Dropdown} from 'semantic-ui-react'
+import {useSelector} from "react-redux";
+
 
 import {
     CUSTOMER_INPUTS_DATA,
@@ -11,14 +13,16 @@ import {
     DELIVERY_DEFAULT,
     ADDRESS_DEFAULT
 } from "../../../constants/checkout-form.options";
-import {checkoutFieldValidate} from '../../../utils'
+import {checkoutFieldValidate, orderIdGenerator} from '../../../utils'
+import { ModalCheckout} from "../../../components";
 import './style.scss'
-import {useSelector} from "react-redux";
+
 
 const CheckoutForm = () => {
     const cartItems = useSelector(({Cart}) => Cart.list)
 
     const [error, setError] = useState(false)
+    const [modalVisibility, setModalVisibility] = useState(false)
 
     const [connectionMethod, setConnectionMethod] = useState('')
     const [deliveryMethod, setDeliveryMethod] = useState(null)
@@ -27,10 +31,16 @@ const CheckoutForm = () => {
     const [delivery, setDelivery] = useState(DELIVERY_DEFAULT)
     const [address, setAddress] = useState(ADDRESS_DEFAULT)
 
+    const [order, setOrder] = useState(null)
+
     const handleConnectionChange = ({target}) => setConnectionMethod(target.innerText)
     const handleDeliveryChange = (e, {value}) => {
         setDeliveryMethod(value)
         setDelivery({...delivery, method: {value: e.target.innerText, isValid: true}})
+    }
+
+    const onModalAction = (key) => {
+        key && console.log('Vushka')
     }
 
     const handleOnSubmit = (e) => {
@@ -72,12 +82,24 @@ const CheckoutForm = () => {
                 }
             },
             products: [
-                ...cartItems
+                ...cartItems.map( item => ({
+                        name: item.name,
+                        price: item.price,
+                        category: item.category.name,
+                        subcategory: item.subcategory.name,
+                        quantity: item.quantity,
+                        size: item.selectedSize
+                    }
+                ))
             ],
+            orderId: orderIdGenerator(),
             connectionMethod
         }
 
+        console.log('wtf')
+        setOrder(orderToSend)
         setError(false)
+        setModalVisibility(true)
         console.log('order', orderToSend)
     }
 
@@ -215,12 +237,19 @@ const CheckoutForm = () => {
             }
 
             <br/>
-            <button
+            <ModalCheckout
+                setAction={onModalAction}
+                onSubmit={handleOnSubmit}
+                order={order}
+                modalVisibility={modalVisibility}
+                setModalVisibility={setModalVisibility}
+                />
+           {/* <button
                 className='basic-button'
                 type='submit'
                 onClick={handleOnSubmit}
             >Готово
-            </button>
+            </button>*/}
 
         </Form>
     )
