@@ -205,13 +205,11 @@ const CheckoutForm = () => {
                 )
             }
             <br/>
-            <Button inverted
-                    color='black'
-                    size='big'
-                    id='submit-button'
+            <button
+                    className='basic-button'
                     type='submit'
                     onClick={handleOnSubmit}
-            >Готово</Button>
+            >Готово</button>
         </Form>
     )
 }

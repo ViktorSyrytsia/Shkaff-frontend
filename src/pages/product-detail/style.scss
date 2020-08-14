@@ -16,10 +16,10 @@
     display: flex;
 
     &__images {
-      height: 540px;
+      height: 600px;
       display: grid;
       grid-template-columns: repeat(4, 100px);
-      grid-template-rows: 100px 100px 100px 100px 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 110px;
       grid-gap: 10px;
       margin-top: 10px;
 
