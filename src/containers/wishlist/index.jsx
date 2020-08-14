@@ -55,7 +55,6 @@ const Wishlist = () => {
                             </Message>)
                 }
             </Item.Group>}
-       >
         </div>
     )
 }

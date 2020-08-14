@@ -4,6 +4,8 @@ import CategoryItem from '../category-item';
 
 import './style.scss';
 import { Link } from 'react-router-dom';
+import {linkGenerator} from "../../utils";
+import {setToLocalStorage} from "../../services/local-storage";
 
 
 const Categories = () => {
@@ -16,7 +18,8 @@ const Categories = () => {
                                 {categories.map((cat, idx) => {
                                         if (idx <= 1) {
                                                 return (
-                                                        <Link className="link" key={cat.id} to={cat.name}>
+                                                        <Link className="link" key={cat.id} to={{pathname: linkGenerator(cat), query: cat}}
+                                                              onClick={() => setToLocalStorage('currentSubcategory', null)}>
                                                                 <CategoryItem content={cat} />
                                                         </Link>
                                                 )
@@ -28,7 +31,7 @@ const Categories = () => {
                                 {categories.map((cat, idx) => {
                                         if (idx > 1) {
                                                 return (
-                                                        <Link className="link" key={cat.id} to={cat.name}>
+                                                        <Link className="link" key={cat.id} to={{pathname: linkGenerator(cat), query: cat}}>
                                                                 <CategoryItem content={cat} />
                                                         </Link>
                                                 )
