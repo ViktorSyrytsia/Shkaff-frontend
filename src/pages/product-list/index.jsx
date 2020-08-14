@@ -66,27 +66,29 @@ const ProductList = ({ location: { query }, match: { params } }) => {
                                                 .filter(sub => sub.category.id === categoryID)} />
                         </div>
 
+                        <div className="product-list__dropdown-section__flex">
+                                <div className="product-list__dropdown-section">
 
-                        <div className="product-list__dropdown-section">
-                                <Menu>
-                                        <Menu.Menu position='left'>
-                                                <DropDown
-                                                        id={productFilterObject.filterName}
-                                                        name={productFilter}
-                                                        options={productFilterObject.filterOptions}
-                                                        handleDropDown={handleDropDown}
-                                                />
-                                        </Menu.Menu>
-                                        <Menu.Menu position='right'>
-                                                <DropDown
-                                                        id={productSortObject.sortName}
-                                                        name={productSort}
-                                                        options={productSortObject.sortOptions}
-                                                        handleDropDown={handleDropDown}
-                                                />
-                                        </Menu.Menu>
-                                </Menu>
+
+                                        <DropDown
+                                                id={productFilterObject.filterName}
+                                                name={productFilter}
+                                                options={productFilterObject.filterOptions}
+                                                handleDropDown={handleDropDown}
+                                        />
+
+
+                                        <DropDown
+                                                id={productSortObject.sortName}
+                                                name={productSort}
+                                                options={productSortObject.sortOptions}
+                                                handleDropDown={handleDropDown}
+                                        />
+
+                                </div>
                         </div>
+
+
 
 
                         <div className="product-cards__container">
