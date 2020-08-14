@@ -17,19 +17,19 @@ const CategoryItem = ({ content }) => {
                 switch (content.name) {
                         case 'Жінкам':
                                 return {
-                                        [option]: '#674794'
+                                        [option]: '#884f3b'
                                 }
                         case 'Чоловікам':
                                 return {
-                                        [option]: '#ea3f34'
+                                        [option]: '#5f443d'
                                 }
                         case 'Дітям':
                                 return {
-                                        [option]: '#f2982c'
+                                        [option]: '#dcb74e'
                                 }
                         case 'Для дому':
                                 return {
-                                        [option]: '#52a360'
+                                        [option]: '#7d9362'
                                 }
                         default:
                                 return {

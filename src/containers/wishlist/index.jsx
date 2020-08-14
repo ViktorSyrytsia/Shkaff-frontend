@@ -19,11 +19,10 @@ const Wishlist = () => {
         item && dispatch(removeItemFromWishlist(item.id))
     }
 
-
     return (
         <div className='wishlist'>
             <div className='wishlist__header'>
-                <Icon name='heart' onClick={() => setWishlistVisibility(!wishlistVisibility)}/>
+                <Icon className='header-icons' name='heart' onClick={() => setWishlistVisibility(!wishlistVisibility)}/>
                 {!!wishlistItems.length && <Label circular className='label'>
                     {wishlistItems.length}
                 </Label>}
@@ -50,7 +49,7 @@ const Wishlist = () => {
                                 </Item>
                             ))
                         ) : (
-                            <Message negative>
+                            <Message>
                                 <Message.Header>Список порожній</Message.Header>
                             </Message>)
                 }

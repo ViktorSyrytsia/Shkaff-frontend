@@ -28,7 +28,7 @@ const Cart = () => {
                         </div>
                     </>
                     ) : (
-                    <Message negative>
+                    <Message>
                         <Message.Header>Список порожній</Message.Header>
                     </Message>
                     )

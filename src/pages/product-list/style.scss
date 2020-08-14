@@ -18,7 +18,7 @@
   justify-content: center;
   // padding-bottom: 40px;
   // // border-bottom: 2px solid rgb(235, 235, 235);
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   margin-top: 40px;
 }
 
@@ -39,8 +39,26 @@
       padding: 10px;
     }
   }
+  .spinner {
+    z-index: 1 !important;
+  }
 }
 
 .product-list__dropdown-section {
-  margin: 20px auto;
+  &__flex {
+    display: flex;
+    justify-content: flex-end;
+  }
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  box-shadow: 3px 3px 5px #e0e0e0, -3px -3px 5px #ffffff;
+  border: 1px solid rgb(252, 252, 252);
+}
+
+.product-list__dropdown-section > div {
+  min-width: 8em !important;
 }

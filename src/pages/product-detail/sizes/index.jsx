@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button} from 'semantic-ui-react'
+
+import './style.scss'
 
 const Sizes = ({sizes, selectedSize, setSelectedSize, isSizeErrorVisible, setIsSizeErrorVisible}) => {
     const sizesArray = Object.keys(sizes);
@@ -12,18 +13,16 @@ const Sizes = ({sizes, selectedSize, setSelectedSize, isSizeErrorVisible, setIsS
 
     return (
         <div className={'sizes'}>
-            <Button.Group>
                 {
                     sizesArray.map(value => (
-                        <Button onClick={(e) => handleClick(e, value)}
+                        <button onClick={(e) => handleClick(e, value)}
                                 key={value}
-                                disabled={!sizes[value]}
+                                disabled={!sizes[value] || selectedSize && selectedSize.toLowerCase() === value}
                                 className={selectedSize && selectedSize.toLowerCase() === value ? 'sizes__selected' : ''}>
-                            {value === 'oneSize' ? 'ONE SIZE' : value.toUpperCase()}
-                        </Button>
+                            {value === 'oneSize' ? 'Без розміру' : value.toUpperCase()}
+                        </button>
                     ))
                 }
-            </Button.Group>
             {isSizeErrorVisible && <div className='sizes__error'>Виберіть розмір</div>}
         </div>
     );

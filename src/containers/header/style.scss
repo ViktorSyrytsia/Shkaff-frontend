@@ -2,14 +2,16 @@
   $self: &;
   display: flex;
   height: 60px;
-  background: black;
   align-items: center;
   padding: 0 20px;
+  background: #ffffff;
+  box-shadow: 13px 13px 26px #e3e3e3, -13px -13px 26px #ffffff;
+  border-bottom: 1px solid rgb(247, 247, 247);
 
   &__logo {
     font-size: 3rem;
-    color: white;
-    font-family: 'Great Vibes', cursive;
+    color: #000000;
+    font-family: "Great Vibes", cursive;
     font-weight: 400;
     font-style: normal;
     margin: 0;
@@ -37,7 +39,10 @@
       }
 
       &:hover {
-        background: rgba(71, 71, 71, 0.6);
+        border-radius: 0px;
+        background: #ffffff;
+        box-shadow: 11px 11px 22px #e3e3e3, -11px -11px 22px #ffffff;
+
         #{$self}__subcategories-list {
           display: block;
         }
@@ -50,13 +55,12 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    background: rgba(71, 71, 71, 0.8);
+    background: rgba(234, 234, 234, 0.9);
     z-index: 2;
     position: absolute;
-    top: 59px;
+    top: 58px;
     left: 0;
     min-width: 100%;
-    border-top: 1px solid silver;
 
     a {
       width: 100%;
@@ -67,8 +71,9 @@
 
     > li {
       font-size: 1.1rem;
+
       &:hover {
-        background: rgb(34, 34, 34);
+        background: darken(rgba(234, 234, 234, 0.9), 10%);
       }
     }
   }
@@ -77,20 +82,35 @@
     margin-left: auto;
     display: flex;
     align-items: center;
-    .search {
+
+    .ui.icon.input {
       input {
-        //background: #ffffff75 !important;
+        border-radius: 5px;
+        background: #ffffff;
+        box-shadow: inset -11px -11px 22px #f4f4f4, inset 11px 11px 22px #f4f4f4;
+        border: none;
+        color: #696969;
       }
     }
+
+    i.header-icons {
+      font-size: 1.6rem !important;
+      margin: 0 20px !important;
+      cursor: pointer;
+      color: rgb(179, 179, 179);
+      transition: all 0.1s ease;
+
+      &:hover {
+        color: darken(rgb(179, 179, 179), 30%);
+        transform: scale(1.1);
+      }
+    }
+
     > a {
       position: relative;
 
-      i {
-        font-size: 1.6rem !important;
-        margin: 0 20px 0 0 !important;
-      }
       .cart-label {
-        background: #0088cc !important;
+        background: #ffb231 !important;
         color: white;
         position: absolute;
         right: 5px;
@@ -98,5 +118,10 @@
       }
     }
 
+    .ui.circular.label {
+      min-width: 1.7em;
+      padding: 0.5em !important;
+      font-size: 0.7em;
+    }
   }
 }
