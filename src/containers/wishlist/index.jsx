@@ -23,7 +23,7 @@ const Wishlist = () => {
     return (
         <div className='wishlist'>
             <div className='wishlist__header'>
-                <Icon name='heart' onClick={() => setWishlistVisibility(!wishlistVisibility)}/>
+                <Icon className='header-icons' name='heart' onClick={() => setWishlistVisibility(!wishlistVisibility)}/>
                 {!!wishlistItems.length && <Label circular className='label'>
                     {wishlistItems.length}
                 </Label>}
