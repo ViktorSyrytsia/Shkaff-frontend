@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
         }, [product])
 
         return (
-                <Link className="ui card" to={{ pathname: linkGenerator(product), query: product }}>
+                <Link className="ui card product-card" to={{ pathname: linkGenerator(product), query: product }}>
                         <Image src={product.images[0].link} wrapped ui={false} />
                         <Card.Content>
                                 <div className="product-card__name">
@@ -35,10 +35,6 @@ const ProductCard = ({ product }) => {
                                 </div>
 
                         </Card.Content>
-
-                        <Button color="twitter">
-                                Деталі
-                        </Button>
                 </Link>
         )
 }
