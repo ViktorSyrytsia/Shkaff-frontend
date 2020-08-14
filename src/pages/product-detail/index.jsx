@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button, Icon} from 'semantic-ui-react'
+import {Icon, Popup} from 'semantic-ui-react'
 import {useDispatch, useSelector} from "react-redux";
 
 import {addItemToWishlist, removeItemFromWishlist} from "../../redux/wishlist/wishlist.actions";
@@ -7,6 +7,7 @@ import {addItemToCart} from "../../redux/cart/cart.actions";
 import Breadcrumb from './breadcrumb'
 import ImageViewer from './image-viewer'
 import Sizes from './sizes'
+import {Spinner} from "../../components";
 
 import './style.scss'
 
@@ -36,7 +37,7 @@ const ProductDetailPage = ({productId}) => {
 
             const sizes = Object.values(product.sizes);
             sizes.pop()
-            setProductAvailable(sizes.some( item  => item))
+            setProductAvailable(sizes.some(item => item))
         }
     }, [wishlistItems, isItemInWishlist, product, productAvailable])
 
@@ -63,30 +64,42 @@ const ProductDetailPage = ({productId}) => {
     return (
         <div className='product-detail'>
             {
-                product &&
-                <>
-                    <Breadcrumb item={product}/>
-                    <div className='product-detail__item'>
-                        <ImageViewer images={product.images}/>
-                        <div className='product-detail__item__description'>
-                            <h1>{product.name}</h1>
-                            <div className={'price'}>{product.price} UAH</div>
-                            <pre dangerouslySetInnerHTML={{__html: product.description}}/>
-                            <Sizes sizes={product.sizes}
-                                   selectedSize={selectedSize}
-                                   setSelectedSize={setSelectedSize}
-                                   isSizeErrorVisible={isSizeErrorVisible}
-                                   setIsSizeErrorVisible={setIsSizeErrorVisible}/>
-                            <div className='to-order'>
-                                <Button disabled={!productAvailable} size='big' color='black' onClick={onAddToCart}>Купити</Button>
-                                <Icon className={isItemInWishlist ? 'selected' : ''}
-                                      name={isItemInWishlist ? 'heart' : 'heart outline'}
-                                      onClick={onAddToWishlist}/>
+                product ? (
+                    <>
+                        <Breadcrumb item={product}/>
+                        <div className='product-detail__item'>
+                            <ImageViewer images={product.images}/>
+                            <div className='product-detail__item__description'>
+                                <h1>{product.name}</h1>
+                                <div className={'price'}>{product.price} UAH</div>
+                                <pre dangerouslySetInnerHTML={{__html: product.description}}/>
+                                <Sizes sizes={product.sizes}
+                                       selectedSize={selectedSize}
+                                       setSelectedSize={setSelectedSize}
+                                       isSizeErrorVisible={isSizeErrorVisible}
+                                       setIsSizeErrorVisible={setIsSizeErrorVisible}/>
+                                <div className='to-order'>
+                                    <Popup
+                                        trigger={<button disabled={!productAvailable}
+                                                         className='basic-button'
+                                                         onClick={onAddToCart}>
+                                            Купити
+                                        </button>}
+                                        disabled={!selectedSize}
+                                        content='Додано в корзину'
+                                        on={['click']}
+                                    />
+                                    <Icon className={isItemInWishlist ? 'selected' : ''}
+                                          name={isItemInWishlist ? 'heart' : 'heart outline'}
+                                          onClick={onAddToWishlist}/>
+                                </div>
+                                {!productAvailable && <div>Немає в наявності</div>}
                             </div>
-                            {!productAvailable && <div>Немає в наявності</div>}
                         </div>
-                    </div>
-                </>
+                    </>
+                ) : (
+                    <Spinner/>
+                )
             }
         </div>
     )

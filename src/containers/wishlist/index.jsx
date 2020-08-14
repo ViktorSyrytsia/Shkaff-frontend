@@ -50,7 +50,7 @@ const Wishlist = () => {
                                 </Item>
                             ))
                         ) : (
-                            <Message negative>
+                            <Message>
                                 <Message.Header>Список порожній</Message.Header>
                             </Message>)
                 }

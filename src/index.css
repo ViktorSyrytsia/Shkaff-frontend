@@ -36,3 +36,28 @@ code {
 a {
     color: #000000 !important;
 }
+
+.basic-button {
+    display: block;
+    width: 300px;
+    margin: 30px auto;
+    padding: 10px;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 5px;
+    background: #272727;
+    box-shadow: 1px 2px 5px #737373, -5px -5px 31px #cecece;
+    transition: all .2s ease;
+    outline: none;
+}
+
+.basic-button:hover {
+    background: #151515;
+    transform: scale(1.05);
+}
+
+.basic-button:active {
+    background: black;
+}
