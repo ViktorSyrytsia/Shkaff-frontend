@@ -7,8 +7,9 @@
 .product-detail {
   margin: 100px auto;
   max-width: 1280px;
-  background: #fff;
-  box-shadow: 5px 5px 14px #f2f2f2, -5px -5px 14px #fff;
+  background: #ffffff;
+  box-shadow: 13px 13px 26px #e3e3e3,
+  -13px -13px 26px #ffffff;
   padding: 50px;
 
   &__item {
@@ -53,23 +54,6 @@
       pre {
         font-family: inherit;
         white-space: pre-line
-      }
-
-      .sizes {
-        position: relative;
-        margin: 10px 0;
-
-        &__selected {
-          background: #1b1c1d !important;
-          color: white !important;
-        }
-
-        &__error {
-          color: crimson;
-          font-size: .8em;
-          position: absolute;
-          bottom: -20px;
-        }
       }
 
       .to-order {
