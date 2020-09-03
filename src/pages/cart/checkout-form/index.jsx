@@ -93,7 +93,6 @@ const CheckoutForm = () => {
         setOrder(orderToSend)
         setError(false)
         setModalVisibility(true)
-        console.log('order', orderToSend)
     }
 
     const handleChange = ({target: {id, name, value}}) => {
@@ -175,7 +174,7 @@ const CheckoutForm = () => {
                 data-id='delivery'
                 onChange={handleDeliveryChange}
                 options={DELIVERY_OPTIONS}
-                placeholder='Виберіть спосіб'
+                placeholder='Виберіть спосіб доставки'
                 selection
                 value={deliveryMethod}
             />

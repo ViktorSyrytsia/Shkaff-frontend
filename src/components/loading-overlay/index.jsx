@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Spinner} from "../index";
 import './style.scss'
 
-const LoadingPage = ({isVisible}) => {
+const LoadingOverlay = ({isVisible}) => {
     const [hide, setHide] = useState(false)
     const [opacityToZero, setOpacityToZero] = useState(false)
 
@@ -23,4 +23,4 @@ const LoadingPage = ({isVisible}) => {
     )
 }
 
-export default LoadingPage
+export default LoadingOverlay

@@ -6,7 +6,7 @@ import { getCategories } from "../../redux/categories/categories.actions";
 import {getProducts} from "../../redux/products/products.actions";
 import {getSubcategories} from "../../redux/subcategories/subcategories.actions";
 import { Header } from '../../containers';
-import {Footer, LoadingPage } from '../index'
+import {Footer, LoadingOverlay } from '../index'
 import {history} from '../../store/store';
 import Routes from "../../routes";
 import {getWishlist} from "../../redux/wishlist/wishlist.actions";
@@ -46,7 +46,7 @@ const App = () => {
 
     return (
         <ConnectedRouter history={history}>
-            <LoadingPage isVisible={loadingPageVisibility}/>
+            <LoadingOverlay isVisible={loadingPageVisibility}/>
             <Header />
             <Routes />
             <Footer />

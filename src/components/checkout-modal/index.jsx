@@ -47,13 +47,15 @@ const ModalCheckout = ({order, setAction, onSubmit, modalVisibility, setModalVis
                             }
                             {
                                 order.delivery.method === 'на відділення Нової Пошти' &&
-                                <span>{order.delivery.city}, відділення. {order.delivery.postOffice}</span>
+                                <span>{order.delivery.city}, відділення {order.delivery.postOffice}</span>
 
                             }
                         </p>
                     }
+                    <p>Сума: <span>{order.products.reduce((sum, item) => sum + item.quantity * item.price, 0)} UAH</span></p>
                 </Modal.Content>
                 <Modal.Actions>
+                    <p>Наш менеджер зв‘яжеться з Вами найближчим часом.</p>
                     <Button onClick={handleButtonClick} inverted color='red'>
                         Відмінити
                     </Button>
