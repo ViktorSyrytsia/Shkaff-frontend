@@ -53,11 +53,15 @@ a {
     outline: none;
 }
 
-.basic-button:hover {
+.basic-button:hover:not(:disabled) {
     background: #151515;
     transform: scale(1.05);
 }
 
 .basic-button:active {
     background: black;
+}
+
+.basic-button:disabled {
+    background: #989898;
 }

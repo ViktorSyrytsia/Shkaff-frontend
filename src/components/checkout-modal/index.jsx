@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Modal} from 'semantic-ui-react'
 
-const ModalCheckout = ({order, setAction, onSubmit, modalVisibility, setModalVisibility}) => {
+const ModalCheckout = ({order, cartItems, setAction, onSubmit, modalVisibility, setModalVisibility}) => {
 
     const handleButtonClick = (e) => {
         setModalVisibility(false)
@@ -19,6 +19,7 @@ const ModalCheckout = ({order, setAction, onSubmit, modalVisibility, setModalVis
             trigger={<button
                 className='basic-button'
                 type='submit'
+                disabled={!cartItems.length}
             >Готово</button>}
             className='remove-modal'
         >

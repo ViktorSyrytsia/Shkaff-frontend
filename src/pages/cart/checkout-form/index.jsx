@@ -233,6 +233,7 @@ const CheckoutForm = () => {
                 setAction={onModalAction}
                 onSubmit={handleOnSubmit}
                 order={order}
+                cartItems={cartItems}
                 modalVisibility={modalVisibility}
                 setModalVisibility={setModalVisibility}
                 />

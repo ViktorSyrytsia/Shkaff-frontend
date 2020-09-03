@@ -13,15 +13,14 @@ const ImageViewer = ({images}) => {
     };
 
     const primaryImage = (
-        <img src={images[0].link} alt='blah' onClick={() => openImage(0)}/>
+        <div style={{background: `url(${images[0].link}) no-repeat center center`, backgroundSize: "cover"}} onClick={() => openImage(0)}/>
     )
 
     const sideImages = (
         images.slice(1).map((img, idx) => (
-            <img
-                src={img.link}
+            <div
+                style={{background: `url(${img.link}) no-repeat center center`, backgroundSize: "cover"}}
                 key={idx}
-                alt='img'
                 onClick={() => openImage(idx + 1)}
             />
         )))

@@ -23,7 +23,7 @@
       grid-gap: 10px;
       margin-top: 10px;
 
-      img {
+      div {
         display: block;
         width: 100%;
         border: 1px solid #d0d0d0;
@@ -31,11 +31,11 @@
         cursor: pointer;
       }
 
-      img:first-child {
+      div:first-child {
         grid-area: 1/1/5/5;
       }
 
-      img:not(:first-child) {
+      div:not(:first-child) {
         grid-area: auto;
       }
     }
