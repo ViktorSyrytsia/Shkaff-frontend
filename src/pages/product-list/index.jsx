@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from "react-redux";
+import { Pagination } from 'semantic-ui-react'
 
 import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
@@ -55,6 +56,20 @@ const ProductList = ({location: {query}, match: {params}}) => {
         id === 'Розміри' ? setProductFilter(options.value) : setProductSort(options.value);
     }
 
+    const productsToShow = () => {
+        return products
+            .filter(prod => prod.category.id === categoryID)
+            .filter(prod => subcategoryID ? prod.subcategory.id === subcategoryID : prod)
+            .filter(prod => productFilter === 'all' ? prod : prod.sizes[productFilter] > 0)
+            .sort((a, b) => productSort === 'new' && new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+            .sort((a, b) => productSort === 'priceLow' && a.price - b.price)
+            .sort((a, b) => productSort === 'priceHigh' && b.price - a.price)
+            .sort((a, b) => productSort === 'rating' &&
+                (b.rating.reduce((a, b) => a + b.value, 0) / b.rating.length) -
+                a.rating.reduce((a, b) => a + b.value, 0) / a.rating.length)
+            .map(product => <ProductCard key={product.id} product={product}/>)
+    }
+
     return (
         <div className="product-list__container">
             <div className="product-list__title">{params.category.toUpperCase()}</div>
@@ -90,27 +105,23 @@ const ProductList = ({location: {query}, match: {params}}) => {
 
 
             <div className="product-cards__container">
+                {products.length ? (
                 <div className="product-cards__list">
                     <Card.Group itemsPerRow={4}>
-
-                        {products.length ? (
-                            products
-                                .filter(prod => prod.category.id === categoryID)
-                                .filter(prod => subcategoryID ? prod.subcategory.id === subcategoryID : prod)
-                                .filter(prod => productFilter === 'all' ? prod : prod.sizes[productFilter] > 0)
-                                .sort((a, b) => productSort === 'new' && new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-                                .sort((a, b) => productSort === 'priceLow' && a.price - b.price)
-                                .sort((a, b) => productSort === 'priceHigh' && b.price - a.price)
-                                .sort((a, b) => productSort === 'rating' &&
-                                    (b.rating.reduce((a, b) => a + b.value, 0) / b.rating.length) -
-                                    a.rating.reduce((a, b) => a + b.value, 0) / a.rating.length)
-                                .map(product => <ProductCard key={product.id} product={product}/>)
-                        ) : (
-                            <Spinner/>
-                        )}
-
+                        {productsToShow()}
                     </Card.Group>
+                    <Pagination
+                        defaultActivePage={1}
+                        firstItem={null}
+                        lastItem={null}
+                        pointing
+                        secondary
+                        totalPages={productsToShow().length / 10}
+                    />
                 </div>
+                ) : (
+                    <Spinner/>
+                )}
             </div>
         </div>
     )
