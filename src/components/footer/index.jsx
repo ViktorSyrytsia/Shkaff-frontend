@@ -28,6 +28,7 @@ const Footer = () => {
                                         <Link className="footer-list__item-content" to="Звязатися">Зв'язатися</Link></div>
 
                         </div>
+                        <div className={'footer-company'}>Copyright © DiVi Corp. All Rights Reserved.</div>
 
                 </div >
         )
