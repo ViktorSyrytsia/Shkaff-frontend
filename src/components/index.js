@@ -7,3 +7,4 @@ export { default as ModalCheckout } from './checkout-modal';
 export { default as LoadingOverlay } from './loading-overlay';
 export { default as NumberInput } from './number-input';
 export { default as DropDown } from '../components/drop-down';
+export { default as Pagination } from '../components/pagination';

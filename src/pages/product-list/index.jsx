@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from "react-redux";
-import { Pagination } from 'semantic-ui-react'
 
 import SubcategoryFilter from './subcategory-filter/';
 import ProductCard from './product-card';
 import {Card} from 'semantic-ui-react';
-import {DropDown, Spinner} from '../../components';
+import {DropDown, Spinner, Pagination} from '../../components';
 import {getFromLocalStorage, setToLocalStorage} from '../../services/local-storage';
 import {productFilterObject, productSortObject} from '../../constants';
 
@@ -19,6 +18,8 @@ const ProductList = ({location: {query}, match: {params}}) => {
         router: router.location.pathname.slice(1),
         categories: Categories.list
     }))
+
+    const [currentPage, setCurrentPage] = useState(1);
 
     const [categoryID, setCategoryID] = useState(null);
     const [subcategoryID, setSubategoryID] = useState(null);
@@ -56,7 +57,7 @@ const ProductList = ({location: {query}, match: {params}}) => {
         id === 'Розміри' ? setProductFilter(options.value) : setProductSort(options.value);
     }
 
-    const productsToShow = () => {
+    const productsFilter = () => {
         return products
             .filter(prod => prod.category.id === categoryID)
             .filter(prod => subcategoryID ? prod.subcategory.id === subcategoryID : prod)
@@ -68,6 +69,12 @@ const ProductList = ({location: {query}, match: {params}}) => {
                 (b.rating.reduce((a, b) => a + b.value, 0) / b.rating.length) -
                 a.rating.reduce((a, b) => a + b.value, 0) / a.rating.length)
             .map(product => <ProductCard key={product.id} product={product}/>)
+    }
+
+    const productsToShow = (length) => {
+
+        console.log(productsFilter().slice(length, length + 10))
+        return productsFilter().slice(length === 1 ? 0 : length, length + 10)
     }
 
     return (
@@ -106,19 +113,16 @@ const ProductList = ({location: {query}, match: {params}}) => {
 
             <div className="product-cards__container">
                 {products.length ? (
-                <div className="product-cards__list">
-                    <Card.Group itemsPerRow={4}>
-                        {productsToShow()}
-                    </Card.Group>
-                    <Pagination
-                        defaultActivePage={1}
-                        firstItem={null}
-                        lastItem={null}
-                        pointing
-                        secondary
-                        totalPages={productsToShow().length / 10}
-                    />
-                </div>
+                    <div className="product-cards__list">
+                        <Card.Group itemsPerRow={4}>
+                            {productsToShow(currentPage)}
+                        </Card.Group>
+                        <Pagination
+                            productsFilter={productsFilter}
+                            productsToShow={productsToShow}
+                            setCurrentPage={setCurrentPage}
+                        />
+                    </div>
                 ) : (
                     <Spinner/>
                 )}
