@@ -1,6 +1,6 @@
-import {toLowerCase} from "./index";
+import { toLowerCase } from "./index";
 
-export default ({id, name, category, subcategory, __typename}) => {
+export default ({ id, name, category, subcategory, __typename }) => {
     switch (__typename) {
         case 'Category':
             return `/${toLowerCase(name)}`
